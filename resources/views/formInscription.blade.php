@@ -100,7 +100,36 @@
                
               </div>
         </div>
-        <div class=" w-100  w-100"></div>
+        <div class=" w-100 mb-3 "></div>
+        
+        <div class="col-4 col-xs-12">
+          <div class="accordion accordion-flush border " id="accordionFlushExample">
+            @foreach($categories as $category)
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                 {{$category->name_categorie}}
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  @foreach ($category->formations as $formation)
+                  <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault">
+                   {{$formation->nom}}
+                  </label>
+                </div>
+                @endforeach
+            
+              </div>
+              </div>
+            </div>
+            @endforeach
+          
+          </div>
+        </div>
+        <div class=" w-100  mb-4"></div>
         <div class="col-2">
             <span class="text-secondary">Photo</span>
             <input type="file" class="file-input" id="fileInput1" style="display: none" name="photo_profil" required>

@@ -37,13 +37,13 @@
 
     <a href="https://api.whatsapp.com/send?phone=0614036218" target="_blank">Envoyer un message WhatsApp</a>
     -->
-    <form class="mb-3" method="POST" action="/add/{{Auth::user()->id}}" enctype="multipart/form-data">
+    <form class="mb-3" method="POST" action="/add_formation/{{Auth::user()->id}}" enctype="multipart/form-data">
         @csrf
      <div class="row" >
         <div class="col-md-4 col-xs-12">
             <div class="mb-3">
               
-                <input type="text" class="form-control" id="nom" aria-describedby="nom" name="nom" placeholder="Nom de l'etudiant*" value="{{ old('name') }}" required>
+                <input type="text" class="form-control" id="nom" aria-describedby="nom" name="nom" placeholder="Nom de l'etudiant*" value="{{ old('nom') }}" required>
                
               </div>
         </div>
@@ -95,10 +95,39 @@
                
               </div>
         </div>
-        <div class=" w-100  w-100"></div>
+        <div class=" w-100 mb-3 "></div>
+        
+        <div class="col-4 col-xs-12">
+          <div class="accordion accordion-flush border " id="accordionFlushExample">
+            @foreach($categories as $category)
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                 {{$category->name_categorie}}
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  @foreach ($category->formations as $formation)
+                  <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault">
+                   {{$formation->nom}}
+                  </label>
+                </div>
+                @endforeach
+            
+              </div>
+              </div>
+            </div>
+            @endforeach
+          
+          </div>
+        </div>
+        <div class=" w-100  mb-4"></div>
         <div class="col-2">
             <span class="text-secondary">CIN</span>
-            <input type="file" class="file-input" id="fileInput1" style="display: none">
+            <input type="file" class="file-input" id="fileInput1" style="display: none" name="cin" required>
             <label for="fileInput1">
               <i class="fas fa-cloud-upload-alt upload-icon"></i>
             </label>

@@ -4,9 +4,12 @@ use App\Http\Controllers\InscriptionController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\masterController;
 use App\Http\Controllers\paiementController;
+use App\Http\Controllers\saveFormationController;
 use App\Http\Controllers\savePaymentController;
 use App\Http\Controllers\saveStudentController;
+use App\Http\Controllers\stageController;
 use App\Mail\ExempleMail;
+use App\Models\Categories;
 use App\Models\Inscription;
 use Illuminate\Support\Facades\Route;
 
@@ -43,15 +46,21 @@ Route::get('/autrepay',function(){
 });
 
 Route::get('/master',function(){
-    return view('Master');
+    $categories= new Categories();
+    $categories= Categories::all();
+    return view('Master',['categories' => $categories]);
 
 });
 Route::get('/stage',function(){
-    return view('Stage');
+    $categories= new Categories();
+    $categories= Categories::all();
+    return view('Stage',['categories' => $categories]);
 
 });
 Route::get('/forma',function(){
-    return view('FprmationType');
+    $categories= new Categories();
+    $categories= Categories::all();
+    return view('FprmationType',['categories' => $categories]);
 
 });
 
@@ -63,6 +72,7 @@ Route::get('/dashboard', function () {
 Route::get('/inscrire',[InscriptionController::class,'inscrire']);
 Route::post('/add/{id}',[saveStudentController::class,'saveStudet']);
 Route::post('/add_master/{id}',[masterController::class,'storemaster']);
-
+Route::post('/add_stage/{id}',[stageController::class,'storeStage']);
+Route::post('/add_formation/{id}',[saveFormationController::class,'stroeAtformation']);
 
 require __DIR__.'/auth.php';

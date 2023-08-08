@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Inscription extends Model
@@ -38,6 +39,10 @@ class Inscription extends Model
     }
     public function forma():BelongsTo{
         return $this->belongsTo(Forma::class);
+
+    }
+    public function allformations():BelongsToMany{
+        return $this->belongsToMany(Formations::class);
 
     }
 }

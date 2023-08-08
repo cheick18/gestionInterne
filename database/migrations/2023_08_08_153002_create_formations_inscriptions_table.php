@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFormationsTable extends Migration
+class CreateFormationsInscriptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateFormationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('formations', function (Blueprint $table) {
+        Schema::create('formations_inscriptions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('categories_id');
-            $table->string('nom');
-            $table->integer('prix');
+            $table->unsignedBigInteger('inscription_id');
+            $table->unsignedBigInteger('formations_id');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateFormationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('formations');
+        Schema::dropIfExists('formations_inscriptions');
     }
 }
