@@ -43,7 +43,11 @@ class saveFormationController extends Controller
         $use->user_id=$id;
         $use->lp_id=$forma->id;
        $use->save();
-       
+       $valid= $request->input('forme',[]);
+       foreach ($valid as $key) {
+        $use->allformations()->attach($key);
+        # code...
+       }
        session()->flash('student_saved', true);
     
        return view('modalSuccess');

@@ -36,7 +36,7 @@
 
     <a href="https://api.whatsapp.com/send?phone=0614036218" target="_blank">Envoyer un message WhatsApp</a>
     -->
-    <form class="mb-3" method="POST" action="/add_stage/{{Auth::user()->id}}" enctype="multipart/form-data">
+    <form class="mb-3" id="myForm" method="POST" action="/add_stage/{{Auth::user()->id}}" enctype="multipart/form-data">
         @csrf
      <div class="row" >
         <div class="col-md-4 col-xs-12">
@@ -70,6 +70,7 @@
               </div>
 
         </div>
+      
         <div class="w-100 mb-3"></div>
         <div class=" col-8 col-xs-12 ">
             <div class="mb-4">
@@ -109,7 +110,7 @@
                 <div class="accordion-body">
                   @foreach ($category->formations as $formation)
                   <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                  <input class="form-check-input" type="checkbox" value="{{$formation->id}}" id="flexCheckDefault" name="forme[]">
                   <label class="form-check-label" for="flexCheckDefault">
                    {{$formation->nom}}
                   </label>
@@ -174,4 +175,33 @@ document.addEventListener('DOMContentLoaded', function() {
     
     });
   </script>
+   <script>
+    $(document).ready(function() {
+        $('#myForm').on('submit', function(event) {
+            event.preventDefault();
+
+            var isChecked = false;
+            $('.form-check-input').each(function() {
+                if ($(this).is(':checked')) {
+                    isChecked = true;
+                    return false;
+                }
+            });
+
+            var allFieldsFilled = true;
+            $('[required]').each(function() {
+                if (!$(this).val()) {
+                    allFieldsFilled = false;
+                    return false;
+                }
+            });
+
+            if (isChecked && allFieldsFilled) {
+                this.submit();
+            } else {
+                alert("Veuillez remplir tous les champs obligatoires et sélectionner au moins une option.");
+            }
+        });
+    });
+    </script>
 @endsection

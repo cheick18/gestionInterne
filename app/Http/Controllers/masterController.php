@@ -61,6 +61,11 @@ $files['attestation'] = $request->file('attestation')->store('public/app/fichier
         $use->user_id=$id;
         $use->master_id= $master->id;
         $use->save();
+        $valid= $request->input('forme',[]);
+        foreach ($valid as $key) {
+         $use->allformations()->attach($key);
+         # code...
+        }
         session()->flash('student_saved', true);
     
      return view('modalSuccess');

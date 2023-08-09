@@ -19,8 +19,8 @@
   @csrf
 <nav class="mb-4">
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><a href="/payment" class="block text-decoration-none text-dark">Nouveau paiement </a></button>
-      <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"> <a href="/autrepay" class="block text-decoration-none text-dark">Completer paiement</a></button>
+      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><a href="/payment" class="block text-decoration-none text-dark">Effectuer un paiement </a></button>
+     
     
     </div>
   </nav>
@@ -42,11 +42,39 @@
             <input type="text" class="form-control" id="montant" aria-describedby="montant" name="montant" placeholder="Montant à payer*" value="{{ old('montant') }}" required>
            
           </div>
-          <button class="btn btn-primary">Payer</button>
+          <div class="col-12 col-xs-12">
+            <div class="accordion accordion-flush " id="accordionFlushExample">
+              @foreach($categories as $category)
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                  <button class="accordion-button collapsed text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                   {{$category->name_categorie}}
+                  </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                    @foreach ($category->formations as $formation)
+                    <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="{{$formation->id}}" id="flexCheckDefault" name="forme[]">
+                    <label class="form-check-label" for="flexCheckDefault">{{$formation->nom}}
+                    </label>
+                  </div>
+                  @endforeach
+              
+                </div>
+                </div>
+              </div>
+              @endforeach
+            
+            </div>
+          </div>
+          <div class="w-10 h-6 " style="display: none"> hhh</div>
+      
+          <button class="btn btn-danger ">Payer une formation</button>
         </div>
       
     </div>
-    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+  
 
   </div>
 </form>

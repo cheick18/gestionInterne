@@ -31,15 +31,15 @@
             <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                     class="fas fa-project-diagram me-2"></i>Inscrits</a>
             <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                    class="fas fa-chart-line me-2"></i>Paiements</a>
+                    class="fas fa-chart-line me-2"></i>Master</a>
             <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                    class="fas fa-paperclip me-2"></i>Salarie</a>
+                    class="fas fa-paperclip me-2"></i>Licence</a>
             <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                    class="fas fa-shopping-cart me-2"></i>Store Mng</a>
+                    class="fas fa-shopping-cart me-2"></i>Stage</a>
             <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                    class="fas fa-gift me-2"></i>Products</a>
+                    class="fas fa-gift me-2"></i>Formations</a>
             <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                    class="fas fa-comment-dots me-2"></i>Chat</a>
+                    class="fas fa-comment-dots me-2"></i>Payments</a>
             <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                     class="fas fa-map-marker-alt me-2"></i>Outlet</a>
 
