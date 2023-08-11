@@ -52,13 +52,15 @@ $files['assurance'] = $request->file('assurance')->store('public/app/fichiers');
         $use->telephone=$validated['telephone'];
         $use->user_id=$id;
         $use->lp_id=$stage->id;
+        
        $use->save();
     
        $valid= $request->input('forme',[]);
        foreach ($valid as $key) {
         $use->allformations()->attach($key);
-        # code...
+        
        }
+       
        
        session()->flash('student_saved', true);
     

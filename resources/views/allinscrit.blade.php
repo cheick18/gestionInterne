@@ -1,13 +1,15 @@
-
-<!-- Content -->
 @extends('layouts.dash')
 @section('content')
+
 @php
 $inscrits=App\Models\Inscription::all();
+$users=App\Models\User::all();
+
+
 
 @endphp
-          
-            
+<h3 class="fs-4 mb-3">Tous les etudiants</h3>
+
 <div class="col">
     <table class="table bg-white rounded shadow-sm  table-hover">
         <thead>
@@ -19,6 +21,7 @@ $inscrits=App\Models\Inscription::all();
                 <th scope="col">Niveau</th> 
                 <th scope="col">Specialite</th>   
                <th scope="col">Telephone</th>
+               <th scope="col">Inscrits par</th>
                 
 
             </tr>
@@ -32,6 +35,7 @@ $inscrits=App\Models\Inscription::all();
                <td>{{$user->Niveau}} </td>
                <td>{{$user->Specialite}} </td>
                <td>{{$user->Telephone}} </td>
+               <td>{{$users->find($user->user_id)->name}} </td>
                    
                    
              
@@ -41,6 +45,5 @@ $inscrits=App\Models\Inscription::all();
 
         </tbody>
     </table>
- @endsection
-<!-- End content-->
-      
+</div>
+@endsection

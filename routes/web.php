@@ -74,5 +74,27 @@ Route::post('/add/{id}',[saveStudentController::class,'saveStudet']);
 Route::post('/add_master/{id}',[masterController::class,'storemaster']);
 Route::post('/add_stage/{id}',[stageController::class,'storeStage']);
 Route::post('/add_formation/{id}',[saveFormationController::class,'stroeAtformation']);
+Route::get('/all',function(){
+    return view('allinscrit');
+});
+Route::get('/all_master',function(){
+    return view('allmaster');
+});
+Route::get('/all_licence',function(){
+    return view('alllicence');
+});
+Route::get('/all_stage',function(){
+    return view('allstage');
+});
+Route::get('/all_formation',function(){
+    return view('allformation');
+});
 
+Route::get("/facture", function(){
+    return view ('FactureStudent');
+});
+Route::get('/add_formation',function(){
+    return view('addFormation');
+
+});
 require __DIR__.'/auth.php';

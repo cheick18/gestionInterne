@@ -28,20 +28,17 @@
         <div class="list-group list-group-flush my-3">
             <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                     class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
-            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+            <a href="/all" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                     class="fas fa-project-diagram me-2"></i>Inscrits</a>
-            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+            <a href="/all_master" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                     class="fas fa-chart-line me-2"></i>Master</a>
-            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+            <a href="/all_licence" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                     class="fas fa-paperclip me-2"></i>Licence</a>
-            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+            <a href="/all_stage" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                     class="fas fa-shopping-cart me-2"></i>Stage</a>
-            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+            <a href="/all_formation" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                     class="fas fa-gift me-2"></i>Formations</a>
-            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                    class="fas fa-comment-dots me-2"></i>Payments</a>
-            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                    class="fas fa-map-marker-alt me-2"></i>Outlet</a>
+          
 
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
@@ -120,7 +117,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <a href="" style="text-decoration: none" >
+                    <a href="/facture" style="text-decoration: none" >
                     <div class="p-3 bg-secondary shadow-sm d-flex justify-content-around align-items-center rounded">
                         <div>
                           
@@ -132,7 +129,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <a href="#" class="block text-decoration-none">
+                    <a href="/add_formation" class="block text-decoration-none">
                     <div class="p-3 bg-danger shadow-sm d-flex justify-content-around align-items-center rounded">
                         <div>
                         

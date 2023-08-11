@@ -15,7 +15,7 @@ class masterController extends Controller
         $validated = $request->validate([
             'nom' => 'required|max:255',
             'prenom' => 'required',
-            'cin'=> 'required',
+            'cin_'=> 'required',
            
             'specialite' => 'required',
             
@@ -54,18 +54,20 @@ $files['attestation'] = $request->file('attestation')->store('public/app/fichier
        
         $use->nom=$validated['nom'];
         $use->prenom=$validated['prenom'];
-        $use->cin=$validated['cin'];
+        $use->cin=$validated['cin_'];
         $use->specialite=$validated['specialite'];
         $use->niveau=$validated['niveau'];
         $use->telephone=$validated['telephone'];
         $use->user_id=$id;
         $use->master_id= $master->id;
+       
         $use->save();
         $valid= $request->input('forme',[]);
         foreach ($valid as $key) {
          $use->allformations()->attach($key);
          # code...
         }
+        
         session()->flash('student_saved', true);
     
      return view('modalSuccess');

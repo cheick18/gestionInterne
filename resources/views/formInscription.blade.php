@@ -48,7 +48,7 @@
         <div class="col-md-4 col-xs-12">
             <div class="mb-3">
               
-                <input type="text" class="form-control" id="nom" aria-describedby="nom" name="nom" placeholder="Nom de l'etudiant*" value="{{ old('name') }}" required>
+                <input type="text" class="form-control" id="nom" aria-describedby="nom" name="nom" placeholder="Nom de l'etudiant*" value="{{ old('nom') }}" required>
                
               </div>
         </div>
@@ -212,5 +212,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     </script>
-</script>
+
 @endsection

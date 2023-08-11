@@ -58,7 +58,7 @@
         <div class=" col-4">
             <div class="mb-4">
               
-                <input type="text" class="form-control" id="cin" aria-describedby="cin" name="cin" placeholder="CIN de l'etudiant*" value="{{ old('cin') }}" required>
+                <input type="text" class="form-control" id="cin" aria-describedby="cin" name="cin_" placeholder="CIN de l'etudiant*" value="{{ old('cin_') }}" required>
                
               </div>
 

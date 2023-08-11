@@ -23,4 +23,8 @@ class Paiement extends Model
     {
         return $this->belongsTo(Inscription::class);
     }
+    public function inst(): BelongsTo
+    {
+        return $this->belongsTo(Formations::class);
+    }
 }

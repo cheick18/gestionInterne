@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Inscription;
 use App\Models\Paiement;
 use App\Models\User;
+use Formations;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class savePaymentController extends Controller
 {
     //
     public function paymentAnuelle(Request $request){
+      
+       
         $validated = $request->validate([
             'type' => 'required',
             'montant' => 'required|integer|min:1',
@@ -18,43 +22,24 @@ class savePaymentController extends Controller
             
           
         ]);
+      
         $paiment= new Paiement();
-        $ins=new Inscription();
-        $ins=Inscription::find(13);
     
      
       
-        $paiment->user_id=3;
-        $paiment->inscription_id=13;
+        $paiment->user_id=Auth::user()->id;
+        $paiment->formations_id=$request->forme[0];
         $paiment->type=$validated['type'];
         $paiment->montant=$validated['montant'];
          $paiment->save();
-         $ins->paiement_id=$paiment->id;
-         $ins->save();
+         
+
          
         
 
        
-      dd('heloo');
+      return view('dashboradSalarie');
     }
 
-    public function paymentb(Request $request){
-        $validated = $request->validate([
-            'montant' => 'required|integer|min:1',
-              
-        ]);
-        dd($validated);
-        /* verifier le type de paiement 
-        $paiment= new Paiement();
-        $inscrit=new Inscription();
-        $inscrit=Inscription::find(1);
-        $inscrit->paiement_id=1;
-        $inscrit->save();
-        $paiment->user_id=1;
-        $paiment->inscription_id=1;
-        $paiment->montant=$validated['montant'];
-         $paiment->save();
-         */
-
-    }
+   
 }

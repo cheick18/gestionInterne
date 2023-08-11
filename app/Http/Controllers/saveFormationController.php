@@ -13,7 +13,7 @@ class saveFormationController extends Controller
         $validated = $request->validate([
             'nom' => 'required|max:255',
             'prenom' => 'required',
-            'cin'=> 'required',
+            'cin_'=> 'required',
            
             'specialite' => 'required',
            
@@ -36,7 +36,7 @@ class saveFormationController extends Controller
         $forma->save();
         $use->nom=$validated['nom'];
         $use->prenom=$validated['prenom'];
-        $use->cin=$validated['cin'];
+        $use->cin=$validated['cin_'];
         $use->specialite=$validated['specialite'];
         $use->niveau=$validated['niveau'];
         $use->telephone=$validated['telephone'];

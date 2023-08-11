@@ -1,11 +1,11 @@
 @extends('layouts.dash')
 @section('content')
-<h3 class="text-danger">Cin de l'utilisateur concerné</h3>
-<form>
+<h3 class="text-secondary">Cin de l'utilisateur concerné</h3>
+<form method="get" action="">
     <div class="col-6">
         <div class="input-group mb-3 ">
             <input type="text" class="form-control"  name="key_word" value="{{ old('key_word') }}" required  autofocus>
-            <button class="btn btn-outline-primary " type="submit" id="button-addon2">Recherché</button>
+            <button class="btn btn-outline-secondary " type="submit" id="button-addon2">Recherché</button>
             @error('key_word')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -15,6 +15,19 @@
         </div>
         
 </form>
+@if(request()->has('key_word'))
+@php 
+  $key_word = request()->input('key_word');
+  $ins= new App\Models\Inscription();
+  $ins=App\Models\Inscription::where('cin', $key_word)->first();
+
+@endphp
+@if((is_null($ins)))
+
+<h5 class="text-secondary mb-2"> Etudiant non present</h5>
+<img src="{{asset('images_empty.jpeg')}}" />
+@else
+
 <form method="POST" action="/paymentAnuelle" enctype="multipart/form-data">
   @csrf
 <nav class="mb-4">
@@ -42,8 +55,8 @@
             <input type="text" class="form-control" id="montant" aria-describedby="montant" name="montant" placeholder="Montant à payer*" value="{{ old('montant') }}" required>
            
           </div>
-          <div class="col-12 col-xs-12">
-            <div class="accordion accordion-flush " id="accordionFlushExample">
+          <div class="col-8 col-xs-12">
+            <div class="accordion accordion-flush border" id="accordionFlushExample">
               @foreach($categories as $category)
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingOne">
@@ -55,9 +68,10 @@
                   <div class="accordion-body">
                     @foreach ($category->formations as $formation)
                     <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="{{$formation->id}}" id="flexCheckDefault" name="forme[]">
+                    <input class="form-check-input" type="radio" value="{{$formation->id}}" id="flexCheckDefault" name="forme[]">
                     <label class="form-check-label" for="flexCheckDefault">{{$formation->nom}}
                     </label>
+                    
                   </div>
                   @endforeach
               
@@ -68,9 +82,9 @@
             
             </div>
           </div>
-          <div class="w-10 h-6 " style="display: none"> hhh</div>
+          <div class="w-10 h-9 " style="visbility:hidden"> hhh</div>
       
-          <button class="btn btn-danger ">Payer une formation</button>
+          <button class="btn btn-danger ">Payer</button>
         </div>
       
     </div>
@@ -78,6 +92,9 @@
 
   </div>
 </form>
+@endif
+@endif
+
 
 
   
