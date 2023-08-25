@@ -28,6 +28,12 @@
               Formations
             </a>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link d" href="/certif">
+              Cerification
+            </a>
+          
+        </li>
         </ul>
       </div>
     </div>
@@ -101,7 +107,7 @@
               </div>
         </div>
         <div class=" w-100 mb-3 "></div>
-        
+        <!--
         <div class="col-4 col-xs-12">
           <div class="accordion accordion-flush border " id="accordionFlushExample">
             @foreach($categories as $category)
@@ -128,6 +134,31 @@
           
           </div>
         </div>
+      -->
+      <div class="col-8 col-xs-12">
+        <div class="accordion accordion-flush border" id="accordionFlushExample">
+            @foreach($categories as $category)
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-heading-{{$category->id}}">
+                    <button class="accordion-button collapsed text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{$category->id}}" aria-expanded="false" aria-controls="flush-collapse-{{$category->id}}">
+                        {{$category->name_categorie}}
+                    </button>
+                </h2>
+                <div id="flush-collapse-{{$category->id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading-{{$category->id}}" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        @foreach ($category->formations as $formation)
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="{{$formation->id}}" id="flexCheckDefault{{$formation->id}}" name="forme[]">
+                            <label class="form-check-label" for="flexCheckDefault{{$formation->id}}">{{$formation->nom}}</label>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+    
         <div class=" w-100  mb-4"></div>
         <div class="col-2">
             <span class="text-secondary">Photo</span>

@@ -5,12 +5,15 @@ $licences=App\Models\Lp::all();
 
 @endphp
 
-<h3 class="fs-4 mb-3">Tous les inscriptions en licence</h3>
+<h3 class="fs-4 mb-3 text-danger">Tous les documents des inscriptions en licence</h3>
 
-<div class="col">
+<div class="col table-responsive">
     <table class="table bg-white rounded shadow-sm  table-hover">
         <thead>
             <tr>
+                
+                  <th scope="col">Nom</th>
+                  <th scope="col">Prenom</th>
         
                 <th scope="col">Photo</th>
                 <th scope="col">Cin</th>
@@ -24,7 +27,14 @@ $licences=App\Models\Lp::all();
         <tbody>
             @foreach ($licences as $user)
             <tr>
-                
+                @php
+               
+              
+                $user_name= App\Models\Inscription::query('lp_id',$user->id)->first();
+               
+                @endphp
+                <td>{{$user_name->Nom}}</td>
+                <td>{{$user_name->Prenom}}</td>
                <td><a href="{{ Storage::url($user->photo_profil)}}" class="text-decoration-none text-secondary"> Photo </a></td>
                <td><a href="{{ Storage::url($user->cin_rv)}}" class="text-decoration-none text-secondary">Cin</a></td>
                <td><a href="{{ Storage::url($user->bac)}}" class="text-decoration-none text-secondary">Bac </a></td>
@@ -36,5 +46,6 @@ $licences=App\Models\Lp::all();
 
         </tbody>
     </table>
+</div>
 
 @endsection

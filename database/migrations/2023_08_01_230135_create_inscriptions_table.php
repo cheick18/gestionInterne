@@ -16,11 +16,11 @@ class CreateInscriptionsTable extends Migration
         Schema::create('inscriptions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('paiements_id')->nullable();
             $table->unsignedBigInteger('lp_id')->nullable();
             $table->unsignedBigInteger('forma_id')->nullable();
             $table->unsignedBigInteger('stage_id')->nullable();
             $table->unsignedBigInteger('master_id')->nullable();
+            $table->unsignedBigInteger('certification_id')->nullable();
              $table->string('Nom');
             $table->string('Prenom');
             $table->string('CIN')->unique();

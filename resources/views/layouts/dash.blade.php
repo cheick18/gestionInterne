@@ -24,7 +24,7 @@
     <div class="d-flex" id="wrapper">
     <div class="bg-white" id="sidebar-wrapper">
         <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
-           <img src="http://uits.ma/wp-content/uploads/2019/11/LOGO-1.png"/></div>
+         <a href="/dashboard"><img src="http://uits.ma/wp-content/uploads/2019/11/LOGO-1.png"/></a></div>
         <div class="list-group list-group-flush my-3">
             <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                     class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
@@ -42,13 +42,20 @@
 
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-
-                        <x-dropdown-link :href="route('logout')"
-                                onclick="event.preventDefault();
-                                            this.closest('form').submit();">
-                            {{ __('Log Out') }}
-                        </x-dropdown-link>
+                    
+                        <div class="dropdown">
+                            <button class="btn btn-link dropdown-toggle list-group-item list-group-item-action bg-transparent second-text fw-bold" type="button" id="logoutDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ __('Log Out') }}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="logoutDropdown">
+                                <a class="dropdown-item " href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    {{ __('Log Out') }}
+                                </a>
+                            </div>
+                        </div>
                     </form>
+                    
                     <!--
             <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                     class="fas fa-power-off me-2"></i>Logout</a>
@@ -76,13 +83,13 @@
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-user me-2"></i>{{Auth::user()->name}}
                         </a>
-                        <!--
+                        
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                        
                             <li><a class="dropdown-item" href="#">Logout</a></li>
                         </ul>
-                    -->
+                    
                     </li>
                 </ul>
             </div>
@@ -91,9 +98,9 @@
         <div class="container-fluid px-4">
             <div class="row g-3 my-2">
                 
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 col-xs-12">
                     <a href="/inscrire" style="text-decoration: none" >
-                    <div class="p-3 bg-primary shadow-sm d-flex justify-content-around align-items-center rounded">
+                    <div class="p-3 bg-danger shadow-sm d-flex justify-content-around align-items-center rounded">
                         <div>
                             <h3 class="fs-2 text-light ">Inscrire</h3>
                           
@@ -104,9 +111,9 @@
                 </a>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 col-xs-12">
                     <a href="/payment" style="text-decoration: none" >
-                    <div class="p-3 bg-warning shadow-sm d-flex justify-content-around align-items-center rounded">
+                    <div class="p-3 bg-danger shadow-sm d-flex justify-content-around align-items-center rounded">
                         <div>
                           
                             <h3 class="fs-2 text-light">Paiement</h3>
@@ -116,9 +123,9 @@
                 </a>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 col-xs-12">
                     <a href="/facture" style="text-decoration: none" >
-                    <div class="p-3 bg-secondary shadow-sm d-flex justify-content-around align-items-center rounded">
+                    <div class="p-3 bg-danger shadow-sm d-flex justify-content-around align-items-center rounded">
                         <div>
                           
                             <h3 class="fs-2 text-light">Recherche</h3>
@@ -128,7 +135,7 @@
                 </a>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6 col-xs-12">
                     <a href="/add_formation" class="block text-decoration-none">
                     <div class="p-3 bg-danger shadow-sm d-flex justify-content-around align-items-center rounded">
                         <div>

@@ -16,9 +16,11 @@
   
  
   </ul>
-  <h3 class="text-danger">Ajouter une formation</h3>
 
-<form action="/ajouter_formation" method="POST">
+  <h3 class="text-danger">Saisir les moficiations de la formations</h3>
+
+
+<form action="/modifierFormation/{{$formationns->id}}" method="POST">
   @csrf
    
 

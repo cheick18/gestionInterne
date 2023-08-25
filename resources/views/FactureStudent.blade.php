@@ -43,7 +43,7 @@ $inscrire=App\Models\Inscription::all();
 
 
 <div class="row">
-    <div class="col-12 col-xs-9">
+    <div class="col table-responsive">
      
 
         <table class="table rounded shadow-sm  table-hover border">
@@ -70,17 +70,23 @@ $inscrire=App\Models\Inscription::all();
                      
                          <td>
                             @forEach($user->allpymentbyinscrit as $pay)
+                            @if($pay->inscriptions_id===$ins->id)
                             <p>{{$pay->type}}</p>
+                            @endif
                             @endforeach
                          </td>
                          <td>
                             @forEach($user->allpymentbyinscrit as $pay)
+                            @if($pay->inscriptions_id===$ins->id)
                             <p>{{$pay->montant}}</p>
+                            @endif
                             @endforeach
                          </td>
                          <td>
                             @forEach($user->allpymentbyinscrit as $pay)
+                            @if($pay->inscriptions_id===$ins->id)
                             <p>{{$pay->created_at}}</p>
+                            @endif
                             @endforeach
                          </td>
                          

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Forma;
 use App\Models\Inscription;
+use App\Models\User;
+use App\Notifications\myNotification;
 use Illuminate\Http\Request;
 
 class saveFormationController extends Controller
@@ -27,6 +29,7 @@ class saveFormationController extends Controller
 
         ]);
         $files = [];
+        
         $files['cin'] = $request->file('cin')->store('public/app/fichiers');
 
         $use=new Inscription();
@@ -46,8 +49,10 @@ class saveFormationController extends Controller
        $valid= $request->input('forme',[]);
        foreach ($valid as $key) {
         $use->allformations()->attach($key);
-        # code...
+        
        }
+       $useer= User::query('name','admin')->first(); 
+       $useer->notify(new myNotification($use)); 
        session()->flash('student_saved', true);
     
        return view('modalSuccess');

@@ -28,7 +28,7 @@
 <img src="{{asset('images_empty.jpeg')}}" />
 @else
 
-<form method="POST" action="/paymentAnuelle" enctype="multipart/form-data">
+<form method="POST" action="/paymentAnuelle/{{$ins->id}}" enctype="multipart/form-data">
   @csrf
 <nav class="mb-4">
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -45,7 +45,7 @@
             <select class="form-select" aria-label="Default select example" name="type">
               
                 <option value="annuel" {{ old('type_paiement') == 'annuel' ? 'selected' : '' }}>Annuel</option>
-                <option value="mensuel" {{ old('type_paiement') == 'mensuel' ? 'selected' : '' }}>Mensuel</option>
+                <option value="tranche" {{ old('type_paiement') == 'tranche' ? 'selected' : '' }}>Tranche</option>
         
               </select>
            
@@ -55,6 +55,7 @@
             <input type="text" class="form-control" id="montant" aria-describedby="montant" name="montant" placeholder="Montant à payer*" value="{{ old('montant') }}" required>
            
           </div>
+          <!--
           <div class="col-8 col-xs-12">
             <div class="accordion accordion-flush border" id="accordionFlushExample">
               @foreach($categories as $category)
@@ -82,7 +83,32 @@
             
             </div>
           </div>
-          <div class="w-10 h-9 " style="visbility:hidden"> hhh</div>
+        -->
+        <div class="col-12">
+          <div class="accordion accordion-flush border" id="accordionFlushExample">
+              @foreach($categories as $category)
+              <div class="accordion-item">
+                  <h2 class="accordion-header" id="flush-heading-{{$category->id}}">
+                      <button class="accordion-button collapsed text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{$category->id}}" aria-expanded="false" aria-controls="flush-collapse-{{$category->id}}">
+                          {{$category->name_categorie}}
+                      </button>
+                  </h2>
+                  <div id="flush-collapse-{{$category->id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading-{{$category->id}}" data-bs-parent="#accordionFlushExample">
+                      <div class="accordion-body">
+                          @foreach ($category->formations as $formation)
+                          <div class="form-check">
+                              <input class="form-check-input" type="radio" value="{{$formation->id}}" id="flexCheckDefault{{$formation->id}}" name="forme[]">
+                              <label class="form-check-label" for="flexCheckDefault{{$formation->id}}">{{$formation->nom}}</label>
+                          </div>
+                          @endforeach
+                      </div>
+                  </div>
+              </div>
+              @endforeach
+          </div>
+      </div>
+      
+          <div class="w-10 block mb-3 " style="visbility:hidden"></div>
       
           <button class="btn btn-danger ">Payer</button>
         </div>

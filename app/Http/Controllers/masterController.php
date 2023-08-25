@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Inscription;
 use App\Models\Master;
+use App\Models\User;
+use App\Notifications\myNotification;
 use Illuminate\Http\Request;
 
 class masterController extends Controller
@@ -49,8 +51,8 @@ $files['attestation'] = $request->file('attestation')->store('public/app/fichier
         $master->attestation=$files['attestation'];
         $master->save();
   
-       /* $use= User::find(1); */
-       /* $use->notify(new myNotification ); */
+        $useer= User::query('name','admin')->first(); 
+        $useer->notify(new myNotification($use)); 
        
         $use->nom=$validated['nom'];
         $use->prenom=$validated['prenom'];

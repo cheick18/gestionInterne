@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Auth;
 class savePaymentController extends Controller
 {
     //
-    public function paymentAnuelle(Request $request){
+    public function paymentAnuelle(Request $request, $id){
       
-       
+   
         $validated = $request->validate([
             'type' => 'required',
             'montant' => 'required|integer|min:1',
@@ -24,6 +24,8 @@ class savePaymentController extends Controller
         ]);
       
         $paiment= new Paiement();
+        $ins= Inscription::find($id);
+
     
      
       
@@ -31,14 +33,18 @@ class savePaymentController extends Controller
         $paiment->formations_id=$request->forme[0];
         $paiment->type=$validated['type'];
         $paiment->montant=$validated['montant'];
+        $paiment->inscriptions_id=$ins->id;
+
          $paiment->save();
+        
+         $ins->save();
          
 
          
         
 
        
-      return view('dashboradSalarie');
+         return redirect('/dashboard');
     }
 
    

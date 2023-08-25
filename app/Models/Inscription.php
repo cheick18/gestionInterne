@@ -16,7 +16,10 @@ class Inscription extends Model
     {
         return $this->belongsTo(User::class);
     }
+      public function certification():BelongsTo{
+        return $this->belongsTo(Certification::class);
 
+      }
     public function allpymentbyinscrit():HasMany{
         return $this->hasMany(Paiement::class);
 

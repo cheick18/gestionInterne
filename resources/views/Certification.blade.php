@@ -27,23 +27,23 @@
             Formations
           </a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link d" href="/certif">
-            Cerification
-          </a>
-        
-      </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link d" href="/certif">
+              Cerification
+            </a>
+          
+        </li>
       </ul>
     </div>
   </div>
 </nav>
-    <h3 class="text-danger">Inscrire un etudiant en formation </h3>
+    <h3 class="text-danger">Inscrire un etudiant pour une certification</h3>
 
     <!--
 
     <a href="https://api.whatsapp.com/send?phone=0614036218" target="_blank">Envoyer un message WhatsApp</a>
     -->
-    <form class="mb-3" id="myForm" method="POST" action="/add_formation/{{Auth::user()->id}}" enctype="multipart/form-data">
+    <form class="mb-3" id="myForm" method="POST" action="/add_certification/{{Auth::user()->id}}" enctype="multipart/form-data">
         @csrf
      <div class="row" >
         <div class="col-md-4 col-xs-12">
@@ -103,57 +103,10 @@
         </div>
         <div class=" w-100 mb-3 "></div>
         <!--
-        <div class="col-4 col-xs-12">
-          <div class="accordion accordion-flush border " id="accordionFlushExample">
-            @foreach($categories as $category)
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingOne">
-                <button class="accordion-button collapsed text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                 {{$category->name_categorie}}
-                </button>
-              </h2>
-              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">
-                  @foreach ($category->formations as $formation)
-                  <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="{{$formation->id}}" id="flexCheckDefault" name="forme[]">
-                  <label class="form-check-label" for="flexCheckDefault">
-                   {{$formation->nom}}
-                  </label>
-                </div>
-                @endforeach
-            
-              </div>
-              </div>
-            </div>
-            @endforeach
-          
-          </div>
-        </div>
+      
+        Liste des certificationns
       -->
-      <div class="col-8 col-xs-12">
-        <div class="accordion accordion-flush border" id="accordionFlushExample">
-            @foreach($categories as $category)
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-heading-{{$category->id}}">
-                    <button class="accordion-button collapsed text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{$category->id}}" aria-expanded="false" aria-controls="flush-collapse-{{$category->id}}">
-                        {{$category->name_categorie}}
-                    </button>
-                </h2>
-                <div id="flush-collapse-{{$category->id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading-{{$category->id}}" data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body">
-                        @foreach ($category->formations as $formation)
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="{{$formation->id}}" id="flexCheckDefault{{$formation->id}}" name="forme[]">
-                            <label class="form-check-label" for="flexCheckDefault{{$formation->id}}">{{$formation->nom}}</label>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
+     
     
         <div class=" w-100  mb-4"></div>
         <div class="col-2">
@@ -186,32 +139,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   </script>
    <script>
-    $(document).ready(function() {
-        $('#myForm').on('submit', function(event) {
-            event.preventDefault();
-
-            var isChecked = false;
-            $('.form-check-input').each(function() {
-                if ($(this).is(':checked')) {
-                    isChecked = true;
-                    return false;
-                }
-            });
-
-            var allFieldsFilled = true;
-            $('[required]').each(function() {
-                if (!$(this).val()) {
-                    allFieldsFilled = false;
-                    return false;
-                }
-            });
-
-            if (isChecked && allFieldsFilled) {
-                this.submit();
-            } else {
-                alert("Veuillez remplir tous les champs obligatoires et sélectionner au moins une option.");
-            }
-        });
-    });
+   
     </script>
 @endsection
