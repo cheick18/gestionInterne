@@ -19,7 +19,8 @@ class CreatePaiementsTable extends Migration
            $table->unsignedBigInteger('inscriptions_id');
             $table->unsignedBigInteger('formations_id');
             $table->string('type');
-            $table->integer('montant');
+            $table->integer('montant')->nullable();
+            $table->string('recu')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -15,17 +15,109 @@
         <a class="nav-link text-secondary " href="/ajout_categori">Nouvelle categorie</a>
     </li>
 </ul>
-<h3 class="text-danger">Liste de toutes les formations</h3>
-@php
-    $formation = App\Models\Formations::all();
+
+<form method="get" action="">
+    <div class="col-12">
+        <div class="row mb-2">
+            <div class="col-4">
+        <div class="input-group mb-3 ">
+            <input type="text" class="form-control"  name="key_word" value="{{ old('key_word') }}" placeholder="Trouvez un formation">
+            <button class="btn btn-outline-danger " type="submit" id="button-addon2">Recherché</button>
+            @error('key_word')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+            </div>
+        </div>
+        </div>
+        
+</form>
+@if(request()->has('key_word'))
+@php 
+  $key_word = request()->input('key_word');
+  $formation = App\Models\Formations::query()
+    ->where('nom', 'like', '%' . $key_word . '%')
+  
+    ->get();
+    if($formation->isEmpty()){
+       $cat=App\Models\Categories::where('name_categorie', $key_word)->first();
+       if($cat==null)
+       {
+        $ins="null"; 
+      
+       }else
+       $ins=App\Models\Formations::where('categories_id', $cat->id)->get(); 
+    }
 @endphp
 
-<div class="col table-responsive">
+@if($formation->isEmpty())
+@if($ins==='null')
+<h5 class="text-secondary mb-2"> Formation non presente dans la collection</h5>
+<img src="{{asset('images_empty.jpeg')}}" />
+@else
+<div  class="col table-responsive">
     <table class="table bg-white rounded shadow-sm table-hover">
         <thead>
             <tr>
                 <th scope="col">Identification</th> 
                 <th scope="col">Nom de la formation</th>
+                <th scope="col">Categorie </th>
+                <th scope="col">Prix </th>
+                <th scope="col">Modifier</th>  
+                @if (Auth::user()->name==='admin')
+                <th scope="col">Supprimer</th>  
+                <th scope="col">Détail</th>
+                @endif
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($ins as $form)
+            <tr>
+                <td>{{$form->id}}</td>
+                <td>{{$form->nom}}</td>
+             
+                @php
+                $cate= App\Models\Categories::find($form->categories_id);
+               
+                @endphp
+                <td>{{$cate->name_categorie}}</td>
+                <td>{{$form->prix}} DH</td>
+                <td> 
+                    <form  method="GET" action="/updateFormation/{{$form->id}}">
+                    <button type="submit" class="btn btn-success">Modifier
+                        </button></form>
+                     </td>
+                
+                @if (Auth::user()->name==='admin')
+                <td>
+                  <form action="/delete/{{$form->id}}" method="GET">
+                    @csrf
+                  
+                  <button type="submit" class="btn btn-danger">Supprimer</button>
+                  </form></td>
+                <td>
+                    <form action="" method="GET">
+                        @csrf
+                        <input type="hidden" name="id" value="{{$form->id}}">
+                        <button type="button" class="btn btn-secondary open-modal" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$form->id}}">Information</button>
+                    </form>
+                </td>
+                @endif
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+@endif
+@else
+<div  class="col table-responsive">
+    <table class="table bg-white rounded shadow-sm table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Identification</th> 
+                <th scope="col">Nom de la formation</th>
+                <th scope="col">Categorie </th>
                 <th scope="col">Prix </th>
                 <th scope="col">Modifier</th>  
                 @if (Auth::user()->name==='admin')
@@ -39,8 +131,83 @@
             <tr>
                 <td>{{$form->id}}</td>
                 <td>{{$form->nom}}</td>
+             
+                @php
+                $cate= App\Models\Categories::find($form->categories_id);
+               
+                @endphp
+                <td>{{$cate->name_categorie}}</td>
                 <td>{{$form->prix}} DH</td>
-                <td> <a href="/updateFormation/{{$form->id}}"><button type="submit" class="btn btn-success">Modifier</button></a></td>
+                <td> 
+                    <form  method="GET" action="/updateFormation/{{$form->id}}">
+                    <button type="submit" class="btn btn-success">Modifier
+                        </button></form>
+                     </td>
+                
+                @if (Auth::user()->name==='admin')
+                <td>
+                  <form action="/delete/{{$form->id}}" method="GET">
+                    @csrf
+                  
+                  <button type="submit" class="btn btn-danger">Supprimer</button>
+                  </form></td>
+                <td>
+                    <form action="" method="GET">
+                        @csrf
+                        <input type="hidden" name="id" value="{{$form->id}}">
+                        <button type="button" class="btn btn-secondary open-modal" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$form->id}}">Information</button>
+                    </form>
+                </td>
+                @endif
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+@endif
+
+@else
+
+
+<h3 class="text-danger">Liste de toutes les formations</h3>
+@php
+    $formation = App\Models\Formations::all();
+
+@endphp
+
+
+<div class="col table-responsive">
+    <table class="table bg-white rounded shadow-sm table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Identification</th> 
+                <th scope="col">Nom de la formation</th>
+                <th scope="col">Categorie </th>
+                <th scope="col">Prix </th>
+                <th scope="col">Modifier</th>  
+                @if (Auth::user()->name==='admin')
+                <th scope="col">Supprimer</th>  
+                <th scope="col">Détail</th>
+                @endif
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($formation as $form)
+            <tr>
+                <td>{{$form->id}}</td>
+                <td>{{$form->nom}}</td>
+             
+                @php
+                $cate= App\Models\Categories::find($form->categories_id);
+               
+                @endphp
+                <td>{{$cate->name_categorie}}</td>
+                <td>{{$form->prix}} DH</td>
+                <td> 
+                    <form  method="GET" action="/updateFormation/{{$form->id}}">
+                    <button type="submit" class="btn btn-success">Modifier
+                        </button></form>
+                     </td>
                 
                 @if (Auth::user()->name==='admin')
                 <td>
@@ -100,6 +267,7 @@
     </div>
 </div>
 @endforeach
+@endif
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {

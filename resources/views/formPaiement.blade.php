@@ -1,8 +1,16 @@
 @extends('layouts.dash')
 @section('content')
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <a class="nav-link text-secondary "  href="/payment">Espece</a>
+  </li>
+    <li class="nav-item">
+      <a class="nav-link text-secondary "href="/virement">Virement</a>
+    </li>
+  </ul>
 <h3 class="text-secondary">Cin de l'utilisateur concerné</h3>
 <form method="get" action="">
-    <div class="col-6">
+    <div class="col-8">
         <div class="input-group mb-3 ">
             <input type="text" class="form-control"  name="key_word" value="{{ old('key_word') }}" required  autofocus>
             <button class="btn btn-outline-secondary " type="submit" id="button-addon2">Recherché</button>
@@ -30,13 +38,16 @@
 
 <form method="POST" action="/paymentAnuelle/{{$ins->id}}" enctype="multipart/form-data">
   @csrf
+  <!--
 <nav class="mb-4">
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><a href="/payment" class="block text-decoration-none text-dark">Effectuer un paiement </a></button>
+      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><a href="/payment" class="block text-decoration-none text-dark"> </a></button>
      
     
     </div>
+  
   </nav>
+-->
   <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
       <div class="col-6">
@@ -56,33 +67,17 @@
            
           </div>
           <!--
-          <div class="col-8 col-xs-12">
-            <div class="accordion accordion-flush border" id="accordionFlushExample">
-              @foreach($categories as $category)
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-headingOne">
-                  <button class="accordion-button collapsed text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                   {{$category->name_categorie}}
-                  </button>
-                </h2>
-                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body">
-                    @foreach ($category->formations as $formation)
-                    <div class="form-check">
-                    <input class="form-check-input" type="radio" value="{{$formation->id}}" id="flexCheckDefault" name="forme[]">
-                    <label class="form-check-label" for="flexCheckDefault">{{$formation->nom}}
-                    </label>
-                    
-                  </div>
-                  @endforeach
-              
-                </div>
-                </div>
-              </div>
-              @endforeach
-            
-            </div>
+          <div class="mb-3">
+           
+            <input type="file" class="file-input" id="fileInput2"  name="recu" style="display: none">
+            <label for="fileInput2">
+              <i class="fas fa-cloud-upload-alt upload-icon"></i>
+            </label>
+            <span class="text-secondary">Recu de payment bancaire</span>
           </div>
+        -->
+          <!--
+          
         -->
         <div class="col-12">
           <div class="accordion accordion-flush border" id="accordionFlushExample">
@@ -110,7 +105,7 @@
       
           <div class="w-10 block mb-3 " style="visbility:hidden"></div>
       
-          <button class="btn btn-danger ">Payer</button>
+          <button class="btn btn-danger ">Valider </button>
         </div>
       
     </div>
@@ -122,7 +117,22 @@
 @endif
 
 
+<script>
+  /*
+  document.addEventListener('DOMContentLoaded', function() {
+    const icon = document.querySelectorAll('.upload-icon');
 
+    
+      icon.addEventListener('click', function() {
+        const associatedFileInput = icon.parentElement.querySelector('.file-input');
+        associatedFileInput.click();
+      });
+  
+
+  
+  });
+  */
+</script>
   
 
 @endsection

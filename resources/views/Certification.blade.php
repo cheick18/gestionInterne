@@ -37,13 +37,13 @@
     </div>
   </div>
 </nav>
-    <h3 class="text-danger">Inscrire un etudiant pour une certification</h3>
+    <h3 class="text-danger">Inscrire un etudiant en certification</h3>
 
     <!--
 
     <a href="https://api.whatsapp.com/send?phone=0614036218" target="_blank">Envoyer un message WhatsApp</a>
     -->
-    <form class="mb-3" id="myForm" method="POST" action="/add_certification/{{Auth::user()->id}}" enctype="multipart/form-data">
+    <form class="mb-3" id="myForm" method="POST" action="/add_certification" enctype="multipart/form-data">
         @csrf
      <div class="row" >
         <div class="col-md-4 col-xs-12">
@@ -102,6 +102,20 @@
               </div>
         </div>
         <div class=" w-100 mb-3 "></div>
+        <div class="col-4"> 
+          <div class="mb-3">
+             @php
+             $certifications= App\Models\listCertif::all();
+             @endphp
+        
+             <select class="form-select" aria-label="Default select example" name="certification">
+                 @forEach($certifications as $cat)
+                 <option value="{{$cat->id}}">{{$cat->nom}}</option>
+                 @endforeach
+               
+               </select>
+       
+       </div>
         <!--
       
         Liste des certificationns

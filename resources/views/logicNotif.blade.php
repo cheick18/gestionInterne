@@ -11,10 +11,14 @@ foreach ($inscrits as $value) {
     foreach ($value->allformations as $formations) {
         $payments = $formations->allpymentbyinscrit->where('inscriptions_id', $value->id)
             ->where('formations_id', $formations->id)->all();
-            dd(  $payments[1]->id);
+            $sommePayee =0;
+            foreach( $payments as $item)
+            $sommePayee = $sommePayee +$item->montant;
 
-        $sommePayee = $payments->sum();
-        dd($sommePayee);
+
+
+      
+       
         $prixFormation = $formations->prix;
 
     
@@ -24,8 +28,8 @@ foreach ($inscrits as $value) {
 
             
             $etudiantsAFacturer[] = [
-                'etudiant_id' => $value->id,
-                'formation_id' => $formations->id,
+                'etudiant_nom' => $value->Nom." ".$value->Prenom,
+                'formation_nom' => $formations->nom,
                 'somme_restante' => $resteAPayer
             ];
         }

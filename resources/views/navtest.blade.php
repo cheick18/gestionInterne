@@ -71,7 +71,7 @@ $inscrits= App\Models\Inscription::all();
 @endphp
 
   <div class="col-md-6  col-xs-12 text-danger  shadow-sm p-3 mb-5 bg-body rounded">
-    <table class="table border-0 ">
+    <table class="table border-0  table-responsive">
         
             <tr>
                 <td class="">User</td>
@@ -120,6 +120,7 @@ $inscrits= App\Models\Inscription::all();
             <th scope="col">Module</th>
             <th scope="col">Type</th> 
             <th scope="col">Montant</th> 
+            <th scope="col">Recu de virement</th> 
             <th scope="col">Date</th>   
           
         </tr>
@@ -145,9 +146,23 @@ $inscrits= App\Models\Inscription::all();
                      <td>
                         @forEach($user->allpymentbyinscrit as $pay)
                         @if($pay->inscriptions_id===$ins->id)
-                        <p>{{$pay->montant}}</p>
+                        @if($pay->montant==null)
+                        <p>Null</p>
+                        @endif
+                        <p >{{$pay->montant}}</p>
                         @endif
                         @endforeach
+                     </td>
+                     <td>
+                      @forEach($user->allpymentbyinscrit as $pay)
+                      @if($pay->inscriptions_id===$ins->id)
+                      @if($pay->recu!==null)
+                     <p><a href="{{ Storage::url($pay->recu)}}" class="text-decoration-none text-secondary"> Recu</a><p>
+                      @else
+                      <p>Null</p>
+                      @endif
+                      @endif
+                      @endforeach
                      </td>
                      <td>
                         @forEach($user->allpymentbyinscrit as $pay)

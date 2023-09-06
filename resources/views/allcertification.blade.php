@@ -1,21 +1,32 @@
 @extends('layouts.dash')
 @section('content')
+<ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link text-secondary "  href="/liste_certifications">Liste des certification</a>
+    </li>
+      <li class="nav-item">
+        <a class="nav-link text-secondary "href="/add_certification">Nouvelle certification</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-secondary "  href="/affectation_certification">Affectation à une certification</a>
+      </li>
+    
+   
+    </ul>
+
+<h3 class="fs-4 mb-3 text-danger">Tous les documents des inscriptions pour certification</h3>
 @php
-$formatios=App\Models\Forma::all();
-/*$inscrits=App\Models\Inscription::all();*/
-
+               
+$certif= App\Models\Certification::all();
 @endphp
-
-<h3 class="fs-4 mb-3 text-danger">Tous les documents des inscriptions pour formation</h3>
-
 <div class="col">
     <table class="table bg-white rounded shadow-sm  table-hover">
         <thead>
             <tr>
         
-                <th scope="col">Nom</th>
-                <th scope="col">Prenom</th>
-                <th scope="col">Identification</th>
+                <th scope="col">Nom de l'inscrit</th>
+                <th scope="col">Prenom de l'inscrit</th>
+                <th scope="col">Nom de la certification</th>
                 <th scope="col">Cin</th>
                  
               
@@ -24,17 +35,13 @@ $formatios=App\Models\Forma::all();
             </tr>
         </thead>
         <tbody>
-            @foreach ($formatios as $user)
+            @foreach ($certif as $user)
             <tr>
-                @php
+                <td>{{ $user->nomEtudiant}}</td>
+                <td>{{ $user->prenomEtudiant}}</td>
+            
+                <td>{{ $user->nom}}</td>
                
-              
-                $user_name= App\Models\Inscription::query('formation_id',$user->id)->first();
-               
-                @endphp
-                <td>{{ $user_name->Nom}}</td>
-                <td>{{ $user_name->Prenom}}</td>
-                <td>{{ $user_name->CIN}}</td>
         
                <td><a href="{{ Storage::url($user->cin)}}" class="text-decoration-none text-secondary"> Cin du stagiaire</a></td>
             

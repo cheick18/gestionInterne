@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCertificationsTable extends Migration
+class CreateListCertifsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateCertificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('certifications', function (Blueprint $table) {
+        Schema::create('list_certifs', function (Blueprint $table) {
             $table->id();
-            $table->string('nomEtudiant');
-            $table->string('prenomEtudiant');
             $table->string('nom');
-            $table->string('cin');
+            $table->integer('prix');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateCertificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('certifications');
+        Schema::dropIfExists('list_certifs');
     }
 }

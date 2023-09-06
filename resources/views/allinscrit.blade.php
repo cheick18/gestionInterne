@@ -70,4 +70,6 @@ $u= $users->find(Auth::user()->id);
         </tbody>
     </table>
 </div>
+
+<a href="/export" class="text-decoration-none  text-secondary mb-3">Telecharger les donée au format excel</a>
 @endsection

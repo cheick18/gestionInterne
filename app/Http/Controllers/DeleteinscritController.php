@@ -12,7 +12,10 @@ class DeleteinscritController extends Controller
     function DeleteInscrits( $id){
 
         $pay= Paiement::where('inscriptions_id',$id)->first();
-        
+        if( $pay===null){
+            
+        }
+        else
         $pay->delete();
         $inscrit= Inscription::find($id);
         

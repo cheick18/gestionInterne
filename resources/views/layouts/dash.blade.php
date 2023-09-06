@@ -28,33 +28,29 @@
         <div class="list-group list-group-flush my-3">
             <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                     class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
-            <a href="/all" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                    class="fas fa-project-diagram me-2"></i>Inscrits</a>
-            <a href="/all_master" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                    class="fas fa-chart-line me-2"></i>Master</a>
-            <a href="/all_licence" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                    class="fas fa-paperclip me-2"></i>Licence</a>
-            <a href="/all_stage" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                    class="fas fa-shopping-cart me-2"></i>Stage</a>
-            <a href="/all_formation" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                    class="fas fa-gift me-2"></i>Formations</a>
+            <a href="/all" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+               <!-- <i class="fas fa-project-diagram me-2"></i>-->Inscrits</a>
+            <a href="/all_master" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                <!--<i class="fas fa-project-diagram me-2"></i-->Master</a>
+            <a href="/all_licence" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+               <!-- <i class="fas fa-project-diagram me-2"></i>-->Licence</a>
+            <a href="/all_stage" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+               <!-- <i class="fas fa-project-diagram me-2"></i>-->Stage</a>
+            <a href="/all_formation" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+               <!-- <i class="fas fa-project-diagram me-2"></i>-->Formations</a>
+                    <a href="/all_certification" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><!--<i
+                        class="fas fa-gift me-2"></i>-->Certifications</a>
           
 
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                    
-                        <div class="dropdown">
-                            <button class="btn btn-link dropdown-toggle list-group-item list-group-item-action bg-transparent second-text fw-bold" type="button" id="logoutDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+    
+                            <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
                                 {{ __('Log Out') }}
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="logoutDropdown">
-                                <a class="dropdown-item " href="{{ route('logout') }}"
-                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    {{ __('Log Out') }}
-                                </a>
-                            </div>
-                        </div>
-                    </form>
+                            </x-dropdown-link>
+                        </form>
                     
                     <!--
             <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
@@ -84,11 +80,7 @@
                             <i class="fas fa-user me-2"></i>{{Auth::user()->name}}
                         </a>
                         
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                        
-                            <li><a class="dropdown-item" href="#">Logout</a></li>
-                        </ul>
+                      
                     
                     </li>
                 </ul>

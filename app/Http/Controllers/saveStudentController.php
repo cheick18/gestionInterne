@@ -45,8 +45,7 @@ $files['diplome_bac'] = $request->file('diplome_bac')->store('public/app/fichier
         $licence->diplome_bac=$files['diplome_bac'];
         $licence->save();
   
-       $useer= User::query('name','admin')->first(); 
-       $useer->notify(new myNotification($licence) ); 
+      
  $use->nom=$validated['nom'];
         $use->prenom=$validated['prenom'];
         $use->cin=$validated['cin'];
@@ -61,7 +60,8 @@ $files['diplome_bac'] = $request->file('diplome_bac')->store('public/app/fichier
         $use->allformations()->attach($key);
         
        }
-       
+       $useer= User::query('name','admin')->first(); 
+       $useer->notify(new myNotification($use) );  
         session()->flash('student_saved', true);
     
      return view('modalSuccess');

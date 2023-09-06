@@ -1,30 +1,42 @@
 <?php
 
+use App\Http\Controllers\addCertificationController;
 use App\Http\Controllers\addFormationController;
+use App\Http\Controllers\affectCertifController;
 use App\Http\Controllers\ajouterCategorie;
 use App\Http\Controllers\ajouterFormation;
+use App\Http\Controllers\certifFromUpdate;
+use App\Http\Controllers\certificationInscriptionController;
 use App\Http\Controllers\chargerdataFormationController;
+use App\Http\Controllers\deleteCertificationController;
 use App\Http\Controllers\DeleteinscritController;
 use App\Http\Controllers\deleteUser;
 use App\Http\Controllers\deletFormation;
+use App\Http\Controllers\detailCertifController;
 use App\Http\Controllers\detailFormationController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\InscriptionController;
 use App\Http\Controllers\inscrireEtudiantFormation;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\masterController;
 use App\Http\Controllers\paiementController;
 use App\Http\Controllers\saveFormationController;
+use App\Http\Controllers\savepaimentVirement;
 use App\Http\Controllers\savePaymentController;
 use App\Http\Controllers\saveStudentController;
 use App\Http\Controllers\stageController;
 use App\Http\Controllers\updateFormationController;
 use App\Http\Controllers\updateInscritController;
+use App\Http\Controllers\updateUserController;
 use App\Mail\ExempleMail;
 use App\Models\Categories;
 use App\Models\Formations;
 use App\Models\Inscription;
 use App\Models\User;
+use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,6 +71,7 @@ Route::get('/payment',[paiementController::class,'payment']);
 /*paymentB*/
 /*Route::get('/test',[paiementController::class,'paymentB']);*/
 Route::post('/paymentAnuelle/{id}',[savePaymentController::class,'paymentAnuelle']);
+Route::post('paymentVirement/{id}',[savepaimentVirement::class,'byvirement']);
 Route::post('/pos',function(){
     return view('welcome');
 });
@@ -118,6 +131,9 @@ Route::get('/all_stage',function(){
 Route::get('/all_formation',function(){
     return view('allformation');
 });
+Route::get('/all_certification',function(){
+    return view('allcertification');
+});
 
 Route::get("/facture", function(){
     return view ('FactureStudent');
@@ -136,6 +152,13 @@ Route::get('/ajout_categori',function(){
 });
 Route::get('/liste_formations',function(){
     return view('listFormation');
+});
+
+Route::get('add_certification',function(){
+    return view('addCertification');
+});
+Route::get('/liste_certifications',function(){
+ return view('listedesCertification');
 });
 Route::get('/detailFormation/{id}', [detailFormationController::class,'send']);
 Route::post('/ajouter_formation',[ajouterFormation::class,'ajouterformation']);
@@ -157,13 +180,38 @@ Route::post('/deleteUser/{id}',function($id){
     $user->delete();
     return redirect('/dashboard');
 });
+Route::post('/deleteCertif/{id}',[deleteCertificationController::class,'delete']);
 
+Route::post('/formeUpdate',[certifFromUpdate::class,'form']);
 
 Route::get('/certif',function(){
     return view('Certification');
 });
-Route::get('/notif',function(){
-    return view('logicNotif');
+Route::post('/add_certification', [certificationInscriptionController::class,'storeAtCertif']);
+Route::post('/ajouter_certification',[addCertificationController::class,'addCertification']);
+Route::get('/affectation_certification',function(){
+return view('affectationCertification');
+});
+/*Route::get('/detailDecertification',function(){
+  return view('detailCertification');
+});*/
+Route::post('/affectation_certif',[affectCertifController::class,'affectCertif']);
+Route::post('/detailcertif',[detailCertifController::class,'sendCertif']);
+/*Route::post('/detailcertif',function(){
+    
+    return view('detailCertification');
+});*/
+Route::post('/modif_user/{id}',function($id){
+    
+    $use= User::find($id);
+    return view('modifUser',['user'=>$use]);
+
+});
+Route::post('/save_update_user/{id}',[updateUserController::class,'store']);
+Route::get('/export',[ExportController::class,'export']);
+Route::get('/virement',function(){
+    $cat= Categories::all();
+    return view('paiB',['categories'=>$cat]);
 });
 });
 require __DIR__.'/auth.php';

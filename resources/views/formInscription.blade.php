@@ -148,7 +148,7 @@
                     <div class="accordion-body">
                         @foreach ($category->formations as $formation)
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" value="{{$formation->id}}" id="flexCheckDefault{{$formation->id}}" name="forme[]">
+                            <input class="form-check-input" type="checkbox" value="{{$formation->id}}" id="flexCheckDefault{{$formation->id}}" name="forme[]">
                             <label class="form-check-label" for="flexCheckDefault{{$formation->id}}">{{$formation->nom}}</label>
                         </div>
                         @endforeach
