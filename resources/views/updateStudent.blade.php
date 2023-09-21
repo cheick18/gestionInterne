@@ -7,7 +7,7 @@
     }
 </style>
 
-<h3 class="text-danger">Modifier les informations relatives à une inscription</h3>
+<h3 class="" style="color: #E62E36">Modifier les informations relatives à une inscription</h3>
     
 
  <!--
@@ -20,13 +20,13 @@
         <div class="col-md-4 col-xs-12">
             <div class="mb-3">
               
-                <input type="text" class="form-control" id="nom" aria-describedby="nom" name="nom" placeholder="Nom de l'etudiant*" value="{{ old('nom') }}" required>
+                <input type="text" class="form-control" id="nom" aria-describedby="nom" name="nom" placeholder="Nom de l'etudiant*" value="{{$inscrits->Nom }}" required>
                
               </div>
         </div>
         <div class="col-md-4 col-xs-12">  <div class="mb-3">
            
-            <input type="text" class="form-control" id="prenom" aria-describedby="prenom" name="prenom" placeholder="Prenom de l'etudiant*" value="{{ old('prenom') }}" required>
+            <input type="text" class="form-control" id="prenom" aria-describedby="prenom" name="prenom" placeholder="Prenom de l'etudiant*" value="{{$inscrits->Prenom}}" required>
           
           </div>
         </div>
@@ -35,7 +35,7 @@
         <div class=" col-4">
             <div class="mb-4">
               
-                <input type="text" class="form-control" id="cin" aria-describedby="cin" name="cin" placeholder="CIN de l'etudiant*" value="{{ old('cin') }}" required>
+                <input type="text" class="form-control" id="cin" aria-describedby="cin" name="cin" placeholder="CIN de l'etudiant*" value="{{$inscrits->CIN}}" required>
                
               </div>
 
@@ -43,7 +43,7 @@
         <div class="col-4 col-xs-12">
             <div class="mb-4">
               
-                <input type="text" class="form-control" id="niveau" aria-describedby="niveau" name="niveau" placeholder="Niveau de l'etudiant*" value="{{ old('niveau') }}" required >
+                <input type="text" class="form-control" id="niveau" aria-describedby="niveau" name="niveau" placeholder="Niveau de l'etudiant*" value="{{ $inscrits->Niveau }}" required >
                
               </div>
 
@@ -52,7 +52,7 @@
         <div class=" col-8 col-xs-12 ">
             <div class="mb-4">
               
-            <textarea class="form-control" placeholder="Specialité de l'etudiant*" id="specialite" name="specialite"  value="{{ old('specialite') }}" required></textarea>
+            <textarea class="form-control" placeholder="Specialité de l'etudiant*" id="specialite" name="specialite" required>{{$inscrits->Specialite}}</textarea>
  
              </div>
 
@@ -61,7 +61,7 @@
         <div class="col-4">
             <div class="mb-4">
               
-                <input type="text" class="form-control" id="telephone" aria-describedby="telephone" name="telephone" placeholder="Telephone*" value="{{ old('telephone') }}" required>
+                <input type="text" class="form-control" id="telephone" aria-describedby="telephone" name="telephone" placeholder="Telephone*" value="{{$inscrits->Telephone}}" required>
                
               </div>
         </div>

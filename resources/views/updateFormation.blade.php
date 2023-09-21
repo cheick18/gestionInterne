@@ -17,7 +17,7 @@
  
   </ul>
 
-  <h3 class="text-danger">Saisir les moficiations de la formations</h3>
+  <h3 class="" style="color: #E62E36">Saisir les moficiations de la formations</h3>
 
 
 <form action="/modifierFormation/{{$formationns->id}}" method="POST">

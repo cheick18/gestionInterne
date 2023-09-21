@@ -7,7 +7,7 @@ $inscrits=App\Models\Inscription::all();
 
 @endphp
 
-<h3 class="fs-4 mb-3 text-danger">Tous les inscrits en master</h3>
+<h3 class="fs-4 mb-3" style="color: #E62E36">Tous les inscrits en master</h3>
 
 <div class="col table-responsive">
     <table class="table bg-white rounded shadow-sm  table-hover">

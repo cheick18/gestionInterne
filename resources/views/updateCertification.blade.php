@@ -13,9 +13,9 @@
     
    
     </ul>
-  <h3 class="text-danger">Modifier la certification</h3>
+  <h3 class="" style="color: #E62E36">Modifier la certification</h3>
 
-<form action="/ajouter_certification" method="POST">
+<form action="/Udate_certif/{{ $certif->id}}" method="POST">
   @csrf
   
 

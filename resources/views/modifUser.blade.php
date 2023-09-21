@@ -16,7 +16,7 @@
   
  
   </ul>
-  <h3 class="text-danger">Modifier un utilisateur</h3>
+  <h3 class="" style="color: #E62E36">Modifier un utilisateur</h3>
   @php
   
 

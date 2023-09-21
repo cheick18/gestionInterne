@@ -2,7 +2,12 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
+                <img src="{{asset('unnamed.jpg')}}" width="200" />
+             
+             <!--
                 <img src="http://uits.ma/wp-content/uploads/2019/11/LOGO-1.png"  class=" fill-current  text-gray-500"/>
+            -->
+           
             </a>
         </x-slot>
 
@@ -50,7 +55,7 @@
                     {{ __('Already registered?') }}
                 </a>
 
-                <x-button class="ml-4">
+                <x-button class="ml-4" style="background: #E62E36">
                     {{ __('Register') }}
                 </x-button>
             </div>

@@ -16,7 +16,7 @@
   
  
   </ul>
-  <h3 class="text-danger">Ajouter une formation</h3>
+  <h3 class="" style="color: #E62E36">Ajouter une formation</h3>
 
 <form action="/ajouter_formation" method="POST">
   @csrf

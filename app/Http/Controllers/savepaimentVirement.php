@@ -31,9 +31,13 @@ class savepaimentVirement extends Controller
          $files = [];
         
         $files['recu'] = $request->file('recu')->store('public/app/fichiers');
+        
     
       
         $paiment->user_id=Auth::user()->id;
+        if(!isset($request->forme[0])||is_null($request->forme[0])){
+            return back()->withInput()->withErrors(['message' => 'Données invalides.']);
+        }
         $paiment->formations_id=$request->forme[0];
         $paiment->type=$validated['type'];
         $paiment->recu=$files['recu'];

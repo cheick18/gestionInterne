@@ -1,6 +1,6 @@
 @extends('layouts.dash')
 @section('content')
-<h1 class="text-danger">Ajouter une formation</h1>
+<h1  style="color: #E62E36">Ajouter une formation</h1>
 <div class="row">
     <div class="col">
         <div class="mb-3">

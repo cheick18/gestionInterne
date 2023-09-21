@@ -1,6 +1,6 @@
 @extends('layouts.dash')
 @section('content')
-<h1 class="text-danger"> Information relative à la formation</h1>
+<h1  style="color: #E62E36"> Information relative à la formation</h1>
 
      
 

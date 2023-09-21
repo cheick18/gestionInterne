@@ -14,17 +14,22 @@ use App\Http\Controllers\deleteUser;
 use App\Http\Controllers\deletFormation;
 use App\Http\Controllers\detailCertifController;
 use App\Http\Controllers\detailFormationController;
+use App\Http\Controllers\downloadFileController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\getYearController;
 use App\Http\Controllers\InscriptionController;
 use App\Http\Controllers\inscrireEtudiantFormation;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\masterController;
 use App\Http\Controllers\paiementController;
+use App\Http\Controllers\SaveCertifUpdate;
 use App\Http\Controllers\saveFormationController;
 use App\Http\Controllers\savepaimentVirement;
 use App\Http\Controllers\savePaymentController;
 use App\Http\Controllers\saveStudentController;
+use App\Http\Controllers\showFormation;
 use App\Http\Controllers\stageController;
+use App\Http\Controllers\telechargerRecu;
 use App\Http\Controllers\updateFormationController;
 use App\Http\Controllers\updateInscritController;
 use App\Http\Controllers\updateUserController;
@@ -166,9 +171,12 @@ Route::post('/affectation_etudiant',[inscrireEtudiantFormation::class,'affectati
 Route::post('/ajouter_categorie', [ajouterCategorie::class,'ajouterCategorie']);
 Route::get('/updateFormation/{id}',[chargerdataFormationController::class,'chargerData']);
 Route::get('/modif_inscription/{id}',function($id){
-    return view('updateStudent',['id'=>$id]);
+    $inscri=Inscription::find($id);
+    return view('updateStudent',['id'=>$id,
+'inscrits'=>$inscri]);
 });
 Route::post('/modifierFormation/{id}',[updateFormationController::class,'update']);
+Route::post('/showFormation',[showFormation::class,'show']);
 
 Route::post('/updateInscrit_/{id}',[updateInscritController::class,'updateInscrit']);
 
@@ -207,6 +215,7 @@ Route::post('/modif_user/{id}',function($id){
     return view('modifUser',['user'=>$use]);
 
 });
+Route::post('/Udate_certif/{id}',[SaveCertifUpdate::class,'update']);
 Route::post('/save_update_user/{id}',[updateUserController::class,'store']);
 Route::get('/export',[ExportController::class,'export']);
 Route::get('/virement',function(){
@@ -214,4 +223,15 @@ Route::get('/virement',function(){
     return view('paiB',['categories'=>$cat]);
 });
 });
+
+Route::get('/dataanalye',function(){
+
+    return view('DataAnalyse');
+});
+Route::post('/getYear',[getYearController::class,'getyear']);
+
+Route::get('/file',[downloadFileController::class,'file']);
+
+Route::post('/telecharger-fichier/{nomDuFichier}', [telechargerRecu::class,'telechargerFichier'])->name('telecharger-fichier');
+
 require __DIR__.'/auth.php';

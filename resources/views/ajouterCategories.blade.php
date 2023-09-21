@@ -16,7 +16,7 @@
   
  
   </ul>
-  <h3 class="text-danger">Ajout de nouvelle categorie</h3>
+  <h3 class="" style="color: #E62E36">Ajout de nouvelle categorie</h3>
 
 <form action="/ajouter_categorie" method="POST">
   @csrf

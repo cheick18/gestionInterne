@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 class addCertificationController extends Controller
 {
     //
+    
+    
     public function addCertification(Request $request){
         
         $validated = $request->validate([

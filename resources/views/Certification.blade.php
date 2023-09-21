@@ -37,7 +37,7 @@
     </div>
   </div>
 </nav>
-    <h3 class="text-danger">Inscrire un etudiant en certification</h3>
+    <h3 class="" style="color: #E62E36">Inscrire un etudiant en certification</h3>
 
     <!--
 

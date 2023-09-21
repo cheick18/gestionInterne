@@ -14,7 +14,7 @@
    
     </ul>
 
-<h3 class="fs-4 mb-3 text-danger">Tous les documents des inscriptions pour certification</h3>
+<h3 class="fs-4 mb-3 " style="color: #E62E36">Tous les documents des inscriptions pour certification</h3>
 @php
                
 $certif= App\Models\Certification::all();

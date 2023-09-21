@@ -24,7 +24,7 @@ class saveStudentController extends Controller
             'specialite' => 'required',
             'niveau' => 'required',
             'telephone' => 'required',
-            'photo_profil'=>'required|mimes:txt,pdf,doc,docx,image',
+            'photo_profil'=>'required|mimes:txt,pdf,doc,docx,jpg,jpeg,png,gif',
             'cin_rv'=>'required|mimes:txt,pdf,doc,docx',
             'bac'=>'required|mimes:txt,pdf,doc,docx',
             'diplome_bac'=>'required|mimes:txt,pdf,doc,docx',

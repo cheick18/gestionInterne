@@ -1,5 +1,14 @@
 @extends('layouts.dash')
 @section('content')
+<style>
+  @media (max-width: 767px) {
+    option {
+        width: auto;
+        
+    }
+  }
+
+</style>
 <ul class="nav nav-pills">
   <li class="nav-item">
     <a class="nav-link text-secondary "  href="/liste_formations">Les formations</a>
@@ -16,7 +25,7 @@
   
  
   </ul>
-  <h3 class="text-danger">Affectation à une formation</h3>
+  <h3 class=""  style="color: #E62E36">Affectation à une formation</h3>
 
 <form action="/affectation_etudiant" method="POST">
   @csrf
@@ -35,7 +44,7 @@
                 $categorie= App\Models\Categories::all();
                 @endphp
            
-                <select class="form-select" aria-label="Default select example" name="formation">
+                <select class="form-select form-control" aria-label="Default select example" name="formation">
                     @forEach($categorie as $cat)
                     @forEach($cat->formations as $cate)
                     <option value="{{$cate->id}}">{{$cate->nom}}</option>

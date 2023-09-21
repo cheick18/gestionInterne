@@ -13,7 +13,7 @@
     
    
     </ul>
-  <h3 class="text-danger">Ajouter une certification</h3>
+  <h3 class="" style="color: #E62E36">Ajouter une certification</h3>
 
 <form action="/ajouter_certification" method="POST">
   @csrf

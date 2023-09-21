@@ -54,6 +54,7 @@ $inscrire=App\Models\Inscription::all();
                     <th scope="col">Module</th>
                     <th scope="col">Type</th> 
                     <th scope="col">Montant</th> 
+                    <th scope="col">Recu</th> 
                     <th scope="col">Date</th>   
                   
                     
@@ -78,10 +79,29 @@ $inscrire=App\Models\Inscription::all();
                          <td>
                             @forEach($user->allpymentbyinscrit as $pay)
                             @if($pay->inscriptions_id===$ins->id)
+                            @if($pay->recu==null)
                             <p>{{$pay->montant}}</p>
+                            @else
+                            <p>Null</p>
+                            @endif
+                           
                             @endif
                             @endforeach
                          </td>
+                         <td>
+                            @forEach($user->allpymentbyinscrit as $pay)
+                            @if($pay->inscriptions_id===$ins->id)
+                            @if($pay->recu!==null)
+                            <p><a href="{{ Storage::url($pay->recu)}}" class="text-decoration-none text-secondary"> Recu</a><p>
+                             @else
+                             <p>Null</p>
+                            @endif
+                          
+                            @endif
+                            @endforeach
+                         </td>
+
+                         
                          <td>
                             @forEach($user->allpymentbyinscrit as $pay)
                             @if($pay->inscriptions_id===$ins->id)

@@ -9,6 +9,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 
 class paidNotification extends Notification
 {
@@ -48,6 +50,10 @@ class paidNotification extends Notification
     {
         $inscrit= Inscription::find($this->data->inscriptions_id);
         $formation= Formations::find($this->data->formations_id);
+    
+        $downloadLink= storage_path('/app'.$this->data->recu);
+    
+
 
         return (new MailMessage)
                     ->line('Confirmation de paiment!!!')
@@ -55,7 +61,12 @@ class paidNotification extends Notification
                     ->line('Prenom '.$inscrit->Prenom)
                     ->line('Module concerné:'.$formation->nom)
                     ->line('Montant versé: '.$this->data->montant)
-                    ->line('Date du versement: '.$this->data->created_at);
+                    ->line('Date du versement: '.$this->data->created_at)
+                    
+                    ->when($this->data->montant == null, function ($message) use ($downloadLink) {
+                      //  $message->action('Télécharger le reçu', $downloadLink);
+                      $message->line('Payment effectué par virement');
+                    });
 
 
                     

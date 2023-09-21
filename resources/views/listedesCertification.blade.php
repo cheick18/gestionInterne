@@ -14,7 +14,7 @@
     
    
     </ul>
-<h3 class="text-danger">Liste de toutes certifications</h3>
+<h3 class=""  style="color: #E62E36">Liste de toutes certifications</h3>
 @php
     $formation = App\Models\listCertif::all();
 @endphp
@@ -24,8 +24,8 @@
         <thead>
             <tr>
                 <th scope="col">Identification</th> 
-                <th scope="col">Nom de la formation</th>
-              <!--  <th scope="col">Prix </th> -->
+                <th scope="col">Nom de la certification</th>
+              <th scope="col">Prix </th> 
                 <th scope="col">Modifier</th>  
                 @if (Auth::user()->name==='admin')
                 <th scope="col">Supprimer</th> 
@@ -40,7 +40,7 @@
             <tr>
                 <td>{{$form->id}}</td>
                 <td>{{$form->nom}}</td>
-               <!-- <td>{{$form->prix}} DH</td> -->
+                <td>{{$form->prix}} DH</td>
                 <td> 
                   <form action="/formeUpdate" method="post">
                     @csrf 

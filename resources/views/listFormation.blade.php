@@ -85,8 +85,8 @@
                 <td>{{$form->prix}} DH</td>
                 <td> 
                     <form  method="GET" action="/updateFormation/{{$form->id}}">
-                    <button type="submit" class="btn btn-success">Modifier
-                        </button></form>
+                        <button type="submit" class="btn btn-success">Modifier
+                            </button></form>
                      </td>
                 
                 @if (Auth::user()->name==='admin')
@@ -97,10 +97,10 @@
                   <button type="submit" class="btn btn-danger">Supprimer</button>
                   </form></td>
                 <td>
-                    <form action="" method="GET">
+                    <form action="/showFormation" method="POST">
                         @csrf
                         <input type="hidden" name="id" value="{{$form->id}}">
-                        <button type="button" class="btn btn-secondary open-modal" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$form->id}}">Information</button>
+                        <button type="submit" class="btn btn-secondary ">Information</button>
                     </form>
                 </td>
                 @endif
@@ -140,8 +140,8 @@
                 <td>{{$form->prix}} DH</td>
                 <td> 
                     <form  method="GET" action="/updateFormation/{{$form->id}}">
-                    <button type="submit" class="btn btn-success">Modifier
-                        </button></form>
+                        <button type="submit" class="btn btn-success">Modifier
+                            </button></form>
                      </td>
                 
                 @if (Auth::user()->name==='admin')
@@ -152,10 +152,10 @@
                   <button type="submit" class="btn btn-danger">Supprimer</button>
                   </form></td>
                 <td>
-                    <form action="" method="GET">
+                    <form  method="POST" action="/showFormation">
                         @csrf
                         <input type="hidden" name="id" value="{{$form->id}}">
-                        <button type="button" class="btn btn-secondary open-modal" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$form->id}}">Information</button>
+                        <button type="submit" class="btn btn-secondary ">Information</button>
                     </form>
                 </td>
                 @endif
@@ -169,7 +169,7 @@
 @else
 
 
-<h3 class="text-danger">Liste de toutes les formations</h3>
+<h3 class=""  style="color: #E62E36">Liste de toutes les formations</h3>
 @php
     $formation = App\Models\Formations::all();
 
@@ -217,10 +217,10 @@
                   <button type="submit" class="btn btn-danger">Supprimer</button>
                   </form></td>
                 <td>
-                    <form action="" method="GET">
+                    <form action="/showFormation" method="POST">
                         @csrf
                         <input type="hidden" name="id" value="{{$form->id}}">
-                        <button type="button" class="btn btn-secondary open-modal" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$form->id}}">Information</button>
+                        <button type="submit" class="btn btn-secondary">Information</button>
                     </form>
                 </td>
                 @endif
@@ -270,6 +270,7 @@
 @endif
 
 <script>
+    /*
     document.addEventListener("DOMContentLoaded", function () {
         const openModalButtons = document.querySelectorAll(".open-modal");
 
@@ -285,5 +286,6 @@
             });
         });
     });
+    */
 </script>
 @endsection

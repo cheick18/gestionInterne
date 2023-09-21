@@ -2,9 +2,10 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
+                <img src="{{asset('unnamed.jpg')}}" width="200" />
         
-                <img src="http://uits.ma/wp-content/uploads/2019/11/LOGO-1.png"  class=" fill-current  text-gray-500"/>
-            </a>
+              <!-- <img src="http://uits.ma/wp-content/uploads/2019/11/LOGO-1.png"  class=" fill-current  text-gray-500"/>
+              --> </a>
         </x-slot>
 
         <!-- Session Status -->
@@ -48,7 +49,7 @@
                     </a>
                 @endif
 
-                <x-button class="ml-3">
+                <x-button class="ml-3" style="background: #E62E36">
                     {{ __('Log in') }}
                 </x-button>
             </div>

@@ -10,6 +10,8 @@ use Formations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use function PHPUnit\Framework\isNull;
+
 class savePaymentController extends Controller
 {
     //
@@ -31,6 +33,10 @@ class savePaymentController extends Controller
      
       
         $paiment->user_id=Auth::user()->id;
+        if(!isset($request->forme[0])||is_null($request->forme[0])){
+        return back()->withInput()->withErrors(['message' => 'Données invalides.']);
+        dd('null');
+        }
         $paiment->formations_id=$request->forme[0];
         $paiment->type=$validated['type'];
         $paiment->montant=$validated['montant'];

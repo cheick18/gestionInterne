@@ -14,7 +14,7 @@ class SaveCertifUpdate extends Controller
             'prix' => 'required|integer|min:1',       
           
         ]);
-        $certif= listCertif::find($id);
+        $certif=listCertif::find($id);
         $certif->nom= $validated['nom'];
         $certif->prix=$validated['prix'];
         $certif->save();

@@ -14,7 +14,7 @@
    
     </ul>
 
-  <h3 class="text-danger">Affectation à une certification</h3>
+  <h3 class="" style="color: #E62E36">Affectation à une certification</h3>
 
 <form action="/affectation_certif" method="POST" enctype="multipart/form-data">
   @csrf
