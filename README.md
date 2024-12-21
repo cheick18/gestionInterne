@@ -1,4 +1,4 @@
-#Application de Gestion interne de UTS
+# Application de Gestion interne de UTS
 Application interne de gestion complète développée avec Laravel, intégrant des technologies Front-End telles que Tailwind CSS, jQuery et JavaScript. Elle couvre un large éventail de fonctionnalités, dont l'inscription des étudiants, la gestion des formations, des certifications, des utilisateurs, de la paie, des rapports graphiques et un système de notification.
 ## Interface d'inscription
 ![Interface d'inscription](./captures/inscription.png)
