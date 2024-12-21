@@ -11,7 +11,6 @@
   </ul>
 -->
 <h3 class="text-secondary">Cin de l'utilisateur concerné</h3>
-
 <form method="get" action="">
     <div class="col-8">
         <div class="input-group mb-3 ">
@@ -30,6 +29,8 @@
 @php 
   $key_word = request()->input('key_word');
   $ins= new App\Models\Inscription();
+  $list= App\Models\listCertif::all();
+  
   $ins=App\Models\Inscription::where('cin', $key_word)->first();
 
 @endphp
@@ -38,17 +39,8 @@
 <h5 class="text-secondary mb-2"> Etudiant non present</h5>
 <img src="{{asset('images_empty.jpeg')}}" />
 @else
-@if ($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
 
-<form method="POST" action="/paymentAnuelle/{{$ins->id}}" enctype="multipart/form-data">
+<form method="POST" action="/payerLaCertification/{{$ins->id}}" enctype="multipart/form-data">
   @csrf
   <!--
 <nav class="mb-4">
@@ -96,7 +88,7 @@
             <label for="fileInput2">
               <i class="fas fa-cloud-upload-alt upload-icon"></i>
             </label>
-            <span class="text-secondary">Recu de payment</span>
+            <span class="text-secondary">Recu</span>
           </div>
         
           <!--
@@ -104,16 +96,16 @@
         -->
         <div class="col-12">
           <div class="accordion accordion-flush border" id="accordionFlushExample">
-              @foreach($categories as $category)
+             
               <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-heading-{{$category->id}}">
-                      <button class="accordion-button collapsed text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{$category->id}}" aria-expanded="false" aria-controls="flush-collapse-{{$category->id}}">
-                          {{$category->name_categorie}}
+                  <h2 class="accordion-header" id="flush-heading-">
+                      <button class="accordion-button collapsed text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-" aria-expanded="false" aria-controls="flush-collapse-">
+                         Cerifications
                       </button>
                   </h2>
-                  <div id="flush-collapse-{{$category->id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading-{{$category->id}}" data-bs-parent="#accordionFlushExample">
+                  <div id="flush-collapse-" class="accordion-collapse collapse" aria-labelledby="flush-heading-" data-bs-parent="#accordionFlushExample">
                       <div class="accordion-body">
-                          @foreach ($category->formations as $formation)
+                          @foreach ($list as $formation)
                           <div class="form-check">
                               <input class="form-check-input" type="radio" value="{{$formation->id}}" id="flexCheckDefault{{$formation->id}}" name="forme[]">
                               <label class="form-check-label" for="flexCheckDefault{{$formation->id}}">{{$formation->nom}}</label>
@@ -122,12 +114,21 @@
                       </div>
                   </div>
               </div>
-              @endforeach
+           
           </div>
       </div>
+
       
-          <div class="w-10 block mb-3 " style="visbility:hidden">
-       </div>
+          <div class="w-10 block mb-3 " style="visbility:hidden"></div>
+          @if ($errors->any())
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+      @endif
       
           <button class="btn btn-danger ">Valider </button>
         </div>

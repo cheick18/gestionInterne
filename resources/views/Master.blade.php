@@ -38,6 +38,15 @@
     </div>
   </nav>
     <h3 class=""  style="color: #E62E36">Inscrire un etudiant en master </h3>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
     <!--
 
@@ -78,7 +87,7 @@
 
         </div>
         <div class="w-100 mb-3"></div>
-        <div class=" col-8 col-xs-12 ">
+        <div class=" col-4 col-xs-12 ">
           <div class="mb-4">
            
             
@@ -87,6 +96,13 @@
            </div>
 
       </div>
+      <div class="col-4">
+        <div class="mb-4">
+          
+            <input type="mail" class="form-control" id="mail" aria-describedby="email" name="email" placeholder="Mail*" value="{{ old('telephone') }}" >
+           
+          </div>
+    </div>
         <div class="w-100 mb-3"></div>
         <div class="col-4">
             <div class="mb-4">
@@ -132,7 +148,9 @@
           
           </div>
         </div>
+        wague
       -->
+      
       <div class="col-8 col-xs-12">
         <div class="accordion accordion-flush border" id="accordionFlushExample">
             @foreach($categories as $category)
@@ -156,7 +174,7 @@
             @endforeach
         </div>
     </div>
-    
+  
         <div class=" w-100  mb-4"></div>
         <div class="col-2">
           <span class="text-secondary">Photo</span>
@@ -219,6 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   </script>
   <script>
+    
     $(document).ready(function() {
         $('#myForm').on('submit', function(event) {
             event.preventDefault();
@@ -246,5 +265,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
     </script>
 @endsection

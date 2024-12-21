@@ -38,6 +38,15 @@
   </div>
 </nav>
     <h3 class="" style="color: #E62E36">Inscrire un etudiant en certification</h3>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
     <!--
 
@@ -78,13 +87,20 @@
 
         </div>
         <div class="w-100 mb-3"></div>
-        <div class=" col-8 col-xs-12 ">
+        <div class=" col-4 col-xs-12 ">
             <div class="mb-4">
               
             <textarea class="form-control" placeholder="Specialité de l'etudiant*" id="specialite" name="specialite"  value="{{ old('specialite') }}" required></textarea>
  
              </div>
 
+        </div>
+        <div class="col-4">
+          <div class="mb-4">
+            
+              <input type="mail" class="form-control" id="mail" aria-describedby="email" name="email" placeholder="Mail*" value="{{ old('telephone') }}" >
+             
+            </div>
         </div>
         <div class="w-100 mb-3"></div>
         <div class="col-4">
@@ -101,6 +117,7 @@
                
               </div>
         </div>
+        
         <div class=" w-100 mb-3 "></div>
         <div class="col-4"> 
           <div class="mb-3">
@@ -116,6 +133,7 @@
                </select>
        
        </div>
+      
         <!--
       
         Liste des certificationns

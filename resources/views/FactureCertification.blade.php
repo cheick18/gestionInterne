@@ -40,7 +40,7 @@ $inscrire=App\Models\Inscription::all();
 <img src="{{asset('images_empty.jpeg')}}" />
 
 @else
-
+<!--
 
 <div class="row">
     <div class="col table-responsive">
@@ -51,7 +51,7 @@ $inscrire=App\Models\Inscription::all();
                 <tr>
             
                   
-                    <th scope="col">Module</th>
+                    <th scope="col">Certification</th>
                     <th scope="col">Type</th> 
                     <th scope="col">Montant</th> 
                     <th scope="col">Recu</th> 
@@ -64,12 +64,26 @@ $inscrire=App\Models\Inscription::all();
 
             <tbody >
                 <p class="text-secondary text-end" style="">{{$ins->Nom." "}}{{$ins->Prenom}}</p>
-                @forEach($ins->allformations as $user)
+                @forEach($ins->allpymentbyinscrit as $pay)
+                @if(isset($pay->list_certif_id)&&is_null($pay->list_certif_id))
+            -->
+$module = [];
+@endphp
+
+@foreach($ins->allpymentbyinscrit as $pay)
+    @if(isset($pay->list_certif_id) && is_null($pay->list_certif_id))
+        @php
+        $module[] = $pay->id;
+        @endphp
+    @endif
+@endforeach
+
+                @endphp
+
+                <!--
                 <tr>
                     <td><h4>{{$user->nom}}</h4></td>
-                   
-                     
-                         <td>
+                     <td>
                             @forEach($user->allpymentbyinscrit as $pay)
                             @if($pay->inscriptions_id===$ins->id)
                             <p>{{$pay->type}}</p>
@@ -79,20 +93,23 @@ $inscrire=App\Models\Inscription::all();
                          <td>
                             @forEach($user->allpymentbyinscrit as $pay)
                             @if($pay->inscriptions_id===$ins->id)
-                         
+                            @if($pay->recu==null)
                             <p>{{$pay->montant}}</p>
-                        
-                        
+                            @else
+                            <p>Null</p>
+                            @endif
+                           
                             @endif
                             @endforeach
                          </td>
                          <td>
-                            @forEach($user->allpymentbyinscrit as $pay)
+                            @forEach($ins->allformations as $user as $pay)
                             @if($pay->inscriptions_id===$ins->id)
-                         
+                            @if($pay->recu!==null)
                             <p><a href="{{ Storage::url($pay->recu)}}" class="text-decoration-none text-secondary"> Recu</a><p>
-                          
-                           
+                             @else
+                             <p>Null</p>
+                            @endif
                           
                             @endif
                             @endforeach
@@ -110,8 +127,9 @@ $inscrire=App\Models\Inscription::all();
                    
                 </tr>
               
-              
+                @endif
                 @endforeach
+               
              
             </tbody>
 

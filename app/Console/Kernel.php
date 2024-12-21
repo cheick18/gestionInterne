@@ -60,7 +60,7 @@ class Kernel extends ConsoleKernel
            $user= User::query('name','admin')->first();
             $user->notify(new ListeDesImpayes($etudiantsAFacturer));
             info('hello le monde');
-        })->monthlyOn(4, '15:00');
+        })->everyMinute();
 
 
     }

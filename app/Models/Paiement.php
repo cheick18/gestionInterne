@@ -16,6 +16,9 @@ class Paiement extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function certification():BelongsTo{
+        return $this->belongsTo(Certification::class);
+    }
     public function ins(): BelongsTo
     {
         return $this->belongsTo(Inscription::class);

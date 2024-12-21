@@ -38,7 +38,7 @@
       </div>
     </div>
   </nav>
-<h3 class="text-danger">Inscrire un etudiant en licence profetionnel</h3>
+<h3 class="text-danger">Inscrire un etudiant en licence professionnelle</h3>
     
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -92,7 +92,7 @@
 
         </div>
         <div class="w-100 mb-3"></div>
-        <div class=" col-8 col-xs-12 ">
+        <div class=" col-4 col-xs-12 ">
             <div class="mb-4">
               
             <textarea class="form-control" placeholder="Specialité de l'etudiant*" id="specialite" name="specialite"  value="{{ old('specialite') }}" required></textarea>
@@ -100,6 +100,13 @@
              </div>
 
         </div>
+        <div class="col-4">
+          <div class="mb-4">
+            
+              <input type="mail" class="form-control" id="mail" aria-describedby="email" name="email" placeholder="Mail*" value="{{ old('telephone') }}" >
+             
+            </div>
+      </div>
         <div class="w-100 mb-3"></div>
         <div class="col-4">
             <div class="mb-4">
@@ -143,7 +150,9 @@
           
           </div>
         </div>
+        waga
       -->
+     
       <div class="col-8 col-xs-12">
         <div class="accordion accordion-flush border" id="accordionFlushExample">
             @foreach($categories as $category)
@@ -167,7 +176,7 @@
             @endforeach
         </div>
     </div>
-    
+
         <div class=" w-100  mb-4"></div>
         <div class="col-2">
             <span class="text-secondary">Photo</span>
@@ -224,6 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <script>
+  
     $(document).ready(function() {
         $('#myForm').on('submit', function(event) {
             event.preventDefault();

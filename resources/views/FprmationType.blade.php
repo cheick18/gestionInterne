@@ -78,13 +78,20 @@
 
         </div>
         <div class="w-100 mb-3"></div>
-        <div class=" col-8 col-xs-12 ">
+        <div class=" col-4 col-xs-12 ">
             <div class="mb-4">
               
             <textarea class="form-control" placeholder="Specialité de l'etudiant*" id="specialite" name="specialite"  value="{{ old('specialite') }}" required></textarea>
  
              </div>
 
+        </div>
+        <div class="col-4">
+          <div class="mb-4">
+            
+              <input type="mail" class="form-control" id="mail" aria-describedby="email" name="email" placeholder="Mail*" value="{{ old('telephone') }}" >
+             
+            </div>
         </div>
         <div class="w-100 mb-3"></div>
         <div class="col-4">
@@ -130,7 +137,9 @@
           
           </div>
         </div>
+        waga
       -->
+      
       <div class="col-8 col-xs-12">
         <div class="accordion accordion-flush border" id="accordionFlushExample">
             @foreach($categories as $category)
@@ -154,7 +163,7 @@
             @endforeach
         </div>
     </div>
-    
+  
         <div class=" w-100  mb-4"></div>
         <div class="col-2">
             <span class="text-secondary">CIN</span>
@@ -164,8 +173,15 @@
             </label>
           </div>
           
-            <div class="w-100 h-6 bg-black" style="opacity:0">hhh</div>
-        <div class="">
+            <div class="w-100 h-6 bg-black" style="opacity:0"></div>
+            @if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+<div class="w-100 h-6 bg-black" style="opacity:0">hhh</div>
+
+        <div class="m">
             <button type="submit" class="btn btn-danger text-light bold px-3 mb-3">Enregistrer</button>
         </div>
        
@@ -186,6 +202,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   </script>
    <script>
+    
     $(document).ready(function() {
         $('#myForm').on('submit', function(event) {
             event.preventDefault();

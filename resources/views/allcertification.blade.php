@@ -10,6 +10,9 @@
       <li class="nav-item">
         <a class="nav-link text-secondary "  href="/affectation_certification">Affectation à une certification</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link text-secondary "  href="/paiementCertification">Payer certification</a>
+      </li>
     
    
     </ul>
@@ -43,7 +46,7 @@ $certif= App\Models\Certification::all();
                 <td>{{ $user->nom}}</td>
                
         
-               <td><a href="{{ Storage::url($user->cin)}}" class="text-decoration-none text-secondary"> Cin du stagiaire</a></td>
+               <td><a href="{{ Storage::url($user->cin)}}" class="text-decoration-none text-secondary" target="_blank"> Cin du stagiaire</a></td>
             
               
             </tr>

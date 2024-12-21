@@ -53,8 +53,11 @@ class savepaimentVirement extends Controller
          
         
 
+        session()->flash('payment_saved', true); 
+     
+
        
-         return redirect('/dashboard');
+         return view('modalPayment');
     }
 
 }

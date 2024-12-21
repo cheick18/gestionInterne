@@ -103,7 +103,7 @@ var intDate;
         @endphp
         <div>
               <h3 class="fs-2">{{$us}}</h3>
-              <p class="fs-5">User</p>
+              <p class="fs-5">Utilisateurs</p>
           </div>
           <!--
           <i class="fas fa-chart-line fs-1 primary-text border rounded-full secondary-bg p-3"></i>
@@ -117,12 +117,13 @@ var intDate;
   <div class="col-12">
   
     <div class="chart-container" style="">
+      
       <canvas id="new"></canvas>
       
   </div>
   </div>
   <div class="w-100 mb-3"></div>
-  <div class="col-md-6 col-xs-12 "> 
+  <div class="col-md-7 col-xs-12 "> 
     <div class="chart-container" style="">
     <canvas id="myLineChart"></canvas>
 </div></div>
@@ -135,7 +136,7 @@ $inscrits= App\Models\Inscription::all();
 
 @endphp
 
-  <div class="col-md-6  col-xs-12 text-danger  shadow-sm p-3 mb-5 bg-body rounded">
+  <div class="col-md-7  col-xs-12 text-danger  shadow-sm p-3 mb-5 bg-body rounded table-responsive">
     <table class="table border-0  table-responsive">
         
             <tr>
@@ -178,14 +179,14 @@ $inscrits= App\Models\Inscription::all();
   </div>
   <div class="col-1"></div>
 
-  <div class="col-md-12 col-xs-12 card shadow-sm p-3 mb-5 bg-body rounded">
-    <table class="table" >
+  <div class="col-md-12 col-xs-12 card shadow-sm p-3 mb-5 bg-body rounded table-responsive">
+    <table class="table table-responsive" >
         <tr>
            <th scope="col"> Nom</th>
             <th scope="col">Module</th>
             <th scope="col">Type</th> 
             <th scope="col">Montant</th> 
-            <th scope="col">Recu de virement</th> 
+            <th scope="col">Recu</th> 
             <th scope="col">Date</th>   
           
         </tr>
@@ -211,9 +212,6 @@ $inscrits= App\Models\Inscription::all();
                      <td>
                         @forEach($user->allpymentbyinscrit as $pay)
                         @if($pay->inscriptions_id===$ins->id)
-                        @if($pay->montant==null)
-                        <p>Null</p>
-                        @endif
                         <p >{{$pay->montant}}</p>
                         @endif
                         @endforeach
@@ -222,9 +220,8 @@ $inscrits= App\Models\Inscription::all();
                       @forEach($user->allpymentbyinscrit as $pay)
                       @if($pay->inscriptions_id===$ins->id)
                       @if($pay->recu!==null)
-                     <p><a href="{{ Storage::url($pay->recu)}}" class="text-decoration-none text-secondary"> Recu</a><p>
-                      @else
-                      <p>Null</p>
+                     <p><a href="{{ Storage::url($pay->recu)}}" class="text-decoration-none text-secondary" target="_blank"> Recu</a><p>
+                    
                       @endif
                       @endif
                       @endforeach
@@ -332,17 +329,17 @@ $formations = App\Models\Formations::all();
 
 foreach ($formations as $formationn) {
     $formationData = [
-        'label' => $formationn->nom, // Utilisez un attribut de la formation pour le nom
-        'data' => [], // Tableau pour stocker le nombre d'inscrits par mois
+        'label' => $formationn->nom, 
+        'data' => [], 
     ];
 
-    $inscritsParMois = array_fill(0, 12, 0); // Initialisez le tableau avec des zéros pour les 12 mois
+    $inscritsParMois = array_fill(0, 12, 0); 
 
     foreach ($formationn->allinscrit as $inscription) {
-        $mois = date('n', strtotime($inscription->created_at)); // Extrait le mois (1-12)
+        $mois = date('n', strtotime($inscription->created_at)); 
         $annee = date('Y', strtotime($inscription->created_at));
         if($annee==$y)
-        $inscritsParMois[$mois - 1]++; // Soustrayez 1 car les mois sont de 1 à 12, mais les indices de tableau sont de 0 à 11
+        $inscritsParMois[$mois - 1]++; 
     }
 
     $formationData['data'] = $inscritsParMois;
@@ -360,7 +357,7 @@ foreach ($formations as $formationn) {
 const ct = document.getElementById('new').getContext('2d');
 
 new Chart(ct, {
-type: 'bar', // Vous pouvez utiliser un graphique à barres pour représenter les données par mois
+type: 'bar', 
 data: {
   labels: [
     'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
@@ -372,6 +369,10 @@ data: {
 options: {
   responsive: true,
   maintainAspectRatio: false,
+  title: {
+        display: true,
+        text: 'Répartition des ventes par produit'
+    },
   scales: {
     x: {
       beginAtZero: true,

@@ -7,6 +7,7 @@ use App\Models\Lp;
 use App\Models\Master;
 use App\Models\User;
 use App\Notifications\myNotification;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Foreach_;
 
@@ -15,7 +16,10 @@ class saveStudentController extends Controller
     //
     public function saveStudet(Request $request, $id){
       
-      
+   /*     try {
+            //code...
+       
+        */
      
       $validated = $request->validate([
             'nom' => 'required|max:255',
@@ -25,7 +29,7 @@ class saveStudentController extends Controller
             'niveau' => 'required',
             'telephone' => 'required',
             'photo_profil'=>'required|mimes:txt,pdf,doc,docx,jpg,jpeg,png,gif',
-            'cin_rv'=>'required|mimes:txt,pdf,doc,docx',
+            'cin_rv'=>'required|mimes:txt,pdf,doc,docx,jpg,jpeg,png,gif',
             'bac'=>'required|mimes:txt,pdf,doc,docx',
             'diplome_bac'=>'required|mimes:txt,pdf,doc,docx',
 
@@ -52,19 +56,26 @@ $files['diplome_bac'] = $request->file('diplome_bac')->store('public/app/fichier
         $use->specialite=$validated['specialite'];
         $use->niveau=$validated['niveau'];
         $use->telephone=$validated['telephone'];
+        $use->email=$request->email;
         $use->user_id=$id;
         $use->lp_id=$licence->id;
        $use->save();
-       $valid= $request->input('forme',[]);
+      $valid= $request->input('forme',[]);
        foreach ($valid as $key) {
         $use->allformations()->attach($key);
         
        }
+       
        $useer= User::query('name','admin')->first(); 
        $useer->notify(new myNotification($use) );  
         session()->flash('student_saved', true);
     
      return view('modalSuccess');
+  /*  } catch (QueryException $e) {
+        
+        return redirect()->back()->with('error', 'Une erreur s\'est produite lors de l\'insertion.');
+    }
+  */
 
     }
 

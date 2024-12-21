@@ -20,6 +20,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
+        Auth::logout();
         return view('auth.register');
     }
 
@@ -33,6 +34,8 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        
+       
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -47,7 +50,10 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        Auth::login($user);
+       
+       // Auth::login($user);
+       $admin=User::where('name','admin')->first();
+       Auth::login($admin);
 
         return redirect(RouteServiceProvider::HOME);
     }

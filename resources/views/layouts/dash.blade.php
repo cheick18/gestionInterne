@@ -80,10 +80,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
-                        <a class="nav-link  second-text fw-bold" href="#" id="navbarDropdown"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user me-2 "></i>{{Auth::user()->name}}
-                    </a>
+                     @if(Auth::user()->name=='admin')
+                    
+                     <a href="/registre"  class="nav-link second-text fw-bold"> <i class="fas fa-user-plus me-2 "></i>Inscription</a>
+                    @else
+                    <a class="nav-link  second-text fw-bold" href="#" id="navbarDropdown"
+                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user me-2 "></i>{{Auth::user()->name}}
+            </a>
+
+                    @endif
                     </li>
                     
                     <li class="">
@@ -156,18 +162,52 @@
                 </div>
             </div>
 <!-- Content -->
+<button  id="scrollToTopButton"> <i class="fas fa-arrow-up"></i></button>
+
+<style>
+    #scrollToTopButton{
+        display: none;
+        position: fixed;z-index:300;right:20px; bottom:20px;
+         color:white; background-color:#E62E36;border:none; 
+         width:40px; 
+         height:40px;
+         border-radius:50%; 
+         cursor: pointer;font-size:24px;    
+    }
+</style>
+<script>
+    $(document).ready(function () {
+   
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 70) {
+            $('#scrollToTopButton').fadeIn();
+        } else {
+            $('#scrollToTopButton').fadeOut();
+        }
+    });
+
+ 
+    $('#scrollToTopButton').click(function () {
+        $('html, body').animate({ scrollTop: 0 }, 600); 
+    });
+});
+
+</script>
 <div class="row my-5">
     @yield('content')
 </div>
           
 <!-- End content-->
+
         </div>
     </div>
 </div>
 </div>
+<!--
 <div class="text-end p-3 border-top border-black">
    Tout droits reservés © <a class="text-decoration-none" href="https://www.linkedin.com/feed/">cheick</a>
   </div>
+-->
 <script>
     var el = document.getElementById("wrapper");
     var toggleButton = document.getElementById("menu-toggle");
@@ -176,5 +216,7 @@
         el.classList.toggle("toggled");
     };
 </script>
+
+
 </body>
 </html>

@@ -6,12 +6,16 @@ use App\Models\Forma;
 use App\Models\Inscription;
 use App\Models\User;
 use App\Notifications\myNotification;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class saveFormationController extends Controller
 {
     //
+
     public function stroeAtformation(Request $request,$id){
+    
+try{
         $validated = $request->validate([
             'nom' => 'required|max:255',
             'prenom' => 'required',
@@ -22,7 +26,7 @@ class saveFormationController extends Controller
             'niveau' => 'required',
             'telephone' => 'required',
              
-            'cin'=>'required|mimes:txt,pdf,doc,docx', 
+            'cin'=>'required|mimes:txt,pdf,doc,docx,jpg,jpeg,png,gif', 
             
             
         
@@ -43,9 +47,11 @@ class saveFormationController extends Controller
         $use->specialite=$validated['specialite'];
         $use->niveau=$validated['niveau'];
         $use->telephone=$validated['telephone'];
+        $use->email=$request->email;
         $use->user_id=$id;
-        $use->lp_id=$forma->id;
+        $use->forma_id=$forma->id;
        $use->save();
+       
        $valid= $request->input('forme',[]);
        foreach ($valid as $key) {
         $use->allformations()->attach($key);
@@ -57,5 +63,9 @@ class saveFormationController extends Controller
     
        return view('modalSuccess');
 
-    }
+    }catch(QueryException $e){
+        return redirect()->back()->with('error', 'Une erreur s\'est produite lors de l\'insertion.');
+
+}
+}
 }

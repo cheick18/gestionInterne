@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\addCertificationController;
 use App\Http\Controllers\addFormationController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\affectCertifController;
 use App\Http\Controllers\ajouterCategorie;
 use App\Http\Controllers\ajouterFormation;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\certifFromUpdate;
 use App\Http\Controllers\certificationInscriptionController;
 use App\Http\Controllers\chargerdataFormationController;
@@ -22,6 +24,7 @@ use App\Http\Controllers\inscrireEtudiantFormation;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\masterController;
 use App\Http\Controllers\paiementController;
+use App\Http\Controllers\paymentCertification;
 use App\Http\Controllers\SaveCertifUpdate;
 use App\Http\Controllers\saveFormationController;
 use App\Http\Controllers\savepaimentVirement;
@@ -37,12 +40,15 @@ use App\Mail\ExempleMail;
 use App\Models\Categories;
 use App\Models\Formations;
 use App\Models\Inscription;
+use App\Models\Paiement;
 use App\Models\User;
 use Illuminate\Http\Client\Request;
 use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Facades\Route;
+
+use function PHPUnit\Framework\isNull;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,8 +62,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth.register');
+    return view('auth.login');
 });
+//Route::get('/admin_registerr', [AdminController::class,'register']);
+
+
 /*Route::get('/det/{id}', function ($id) {
     $formations= new Formations();
     $formations= Formations::find($id);
@@ -216,22 +225,52 @@ Route::post('/modif_user/{id}',function($id){
 
 });
 Route::post('/Udate_certif/{id}',[SaveCertifUpdate::class,'update']);
+Route::post('/payerLaCertification/{id}',[paymentCertification::class,'payer']);
 Route::post('/save_update_user/{id}',[updateUserController::class,'store']);
 Route::get('/export',[ExportController::class,'export']);
 Route::get('/virement',function(){
     $cat= Categories::all();
     return view('paiB',['categories'=>$cat]);
 });
+Route::get('/paiementCertification',function(){
+    return view('PaiementCertification');
+
+}
+
+);
 });
 
 Route::get('/dataanalye',function(){
 
-    return view('DataAnalyse');
+    return view('modalPayment');
 });
 Route::post('/getYear',[getYearController::class,'getyear']);
 
-Route::get('/file',[downloadFileController::class,'file']);
+//Route::get('/file',[downloadFileController::class,'file']);
 
 Route::post('/telecharger-fichier/{nomDuFichier}', [telechargerRecu::class,'telechargerFichier'])->name('telecharger-fichier');
 
 require __DIR__.'/auth.php';
+
+
+//Route::middleware(['guest'])->group(function () {
+    Route::get('/registre',[RegisteredUserController::class,'create']);
+
+    Route::get('/ted',function(){
+        $mode=[];
+        $ins=Inscription::find(15);
+        $pay=Paiement::all();
+        
+        foreach ($pay as $key ) {
+            # code...
+            if($key->inscriptions_id==$ins->id ){
+                if(isset($key->list_certifs_id)&&!is_null($key->list_certifs_id))
+                $mode[]=$key->list_certifs_id;
+
+            }
+        }
+        dd($mode);
+
+
+    });
+//});

@@ -49,26 +49,29 @@ class paidNotification extends Notification
     public function toMail($notifiable)
     {
         $inscrit= Inscription::find($this->data->inscriptions_id);
+        if(!empty($this->data->formations_id))
         $formation= Formations::find($this->data->formations_id);
     
-        $downloadLink= storage_path('/app'.$this->data->recu);
+       $downloadLink= storage_path('/app'.$this->data->recu);
     
 
-
-        return (new MailMessage)
-                    ->line('Confirmation de paiment!!!')
-                    ->line('Nom: '.$inscrit->Nom)
-                    ->line('Prenom '.$inscrit->Prenom)
-                    ->line('Module concerné:'.$formation->nom)
-                    ->line('Montant versé: '.$this->data->montant)
-                    ->line('Date du versement: '.$this->data->created_at)
-                    
-                    ->when($this->data->montant == null, function ($message) use ($downloadLink) {
-                      //  $message->action('Télécharger le reçu', $downloadLink);
-                      $message->line('Payment effectué par virement');
-                    });
-
-
+        $message = (new MailMessage)
+        ->line('Confirmation de paiement!!!')
+        ->line('Nom: ' . $inscrit->Nom)
+        ->line('Prenom ' . $inscrit->Prenom);
+    
+    if (!empty($formation->nom)) {
+        $message->line('Module concerné: ' . $formation->nom);
+    }
+    
+       $message ->line('Montant versé: ' . $this->data->montant)
+        ->line('Date du versement: ' . $this->data->created_at)
+        ->when($this->data->montant == null, function ($message) use ($downloadLink) {
+            $message->line('Payment effectué par virement');
+        });
+    
+    return $message;
+    
                     
     }
 

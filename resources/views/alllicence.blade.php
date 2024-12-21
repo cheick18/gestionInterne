@@ -29,19 +29,26 @@ $licences=App\Models\Lp::all();
                 @php
                
               
-                $user_name= App\Models\Inscription::query('lp_id',$user->id)->first();
+                $user_name= App\Models\Inscription::where('lp_id','=',$user->id)->first();
                
                 @endphp
                   <td >
                     <div style="width: 60px;height:60px; border-radius:50%" class="bg-dark">
                    <img src="{{Storage::url($user->photo_profil)}}" class="img-fluid"  style="width: 100%;height:100%; border-radius:50%;object-fit:cover"/>
                  </div></td>
-                <td class=" pt-4">{{$user_name->Nom}}</td>
-                <td class="pt-4">{{$user_name->Prenom}}</td>
+                <td class=" pt-4">
+                    @if(isset($user_name)&&!is_null($user_name))
+                    {{$user_name->Nom}}
+                    @endif
+                </td>
+                <td class="pt-4">
+                    @if(isset($user_name)&&!is_null($user_name))
+                    {{$user_name->Prenom}}
+                    @endif</td>
         
-               <td class="pt-4"><a href="{{ Storage::url($user->cin_rv)}}" class="text-decoration-none text-secondary">Cin</a></td>
-               <td class="pt-4"><a href="{{ Storage::url($user->bac)}}" class="text-decoration-none text-secondary">Bac </a></td>
-               <td class="pt-4"> <a href="{{ Storage::url($user->diplome_bac)}}" class="text-decoration-none text-secondary">Licence</a></td> 
+               <td class="pt-4"><a href="{{ Storage::url($user->cin_rv)}}" class="text-decoration-none text-secondary" target="_blank">Cin</a></td>
+               <td class="pt-4"><a href="{{Storage::url($user->bac) }}" class="text-decoration-none text-secondary" target="_blank">Bac </a></td>
+               <td class="pt-4"> <a href="{{ Storage::url($user->diplome_bac)}}" class="text-decoration-none text-secondary" target="_blank">Licence</a></td> 
               
             </tr>
         

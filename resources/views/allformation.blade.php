@@ -29,14 +29,16 @@ $formatios=App\Models\Forma::all();
                 @php
                
               
-                $user_name= App\Models\Inscription::query('formation_id',$user->id)->first();
+                $user_name= App\Models\Inscription::where('forma_id','=',$user->id)->first();
+            
                
                 @endphp
-                <td>{{ $user_name->Nom}}</td>
-                <td>{{ $user_name->Prenom}}</td>
-                <td>{{ $user_name->CIN}}</td>
+                
+                <td>  @if(isset($user_name)&&!is_null($user_name)){{ $user_name->Nom}} @endif</td>
+                <td>  @if(isset($user_name)&&!is_null($user_name)){{ $user_name->Prenom}}@endif</td>
+                <td>  @if(isset($user_name)&&!is_null($user_name)){{ $user_name->CIN}} @endif</td>
         
-               <td><a href="{{ Storage::url($user->cin)}}" class="text-decoration-none text-secondary"> Cin du stagiaire</a></td>
+               <td><a href="{{ Storage::url($user->cin)}}" class="text-decoration-none text-secondary" target="_blank"> Cin du stagiaire</a></td>
             
               
             </tr>

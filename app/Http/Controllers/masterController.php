@@ -6,13 +6,16 @@ use App\Models\Inscription;
 use App\Models\Master;
 use App\Models\User;
 use App\Notifications\myNotification;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class masterController extends Controller
 {
     //
     function storemaster( Request $request, $id){
-       
+       try {
+        //code...
+      
         
         $validated = $request->validate([
             'nom' => 'required|max:255',
@@ -23,8 +26,8 @@ class masterController extends Controller
             
             'niveau' => 'required',
             'telephone' => 'required',
-                'photo'=>'required|mimes:txt,pdf,doc,docx,image',
-            'cin'=>'required|mimes:txt,pdf,doc,docx',
+                'photo'=>'required|mimes:txt,pdf,doc,docx,jpg,jpeg,png,gif',
+            'cin'=>'required|mimes:txt,pdf,doc,docx,jpg,jpeg,png,gif',
             'bac'=>'required|mimes:txt,pdf,doc,docx',
             'lp'=>'required|mimes:txt,pdf,doc,docx',
             'attestation'=>'required|mimes:txt,pdf,doc,docx',
@@ -52,27 +55,35 @@ $files['attestation'] = $request->file('attestation')->store('public/app/fichier
         $master->save();
   
         $useer= User::query('name','admin')->first(); 
-        $useer->notify(new myNotification($use)); 
-       
+     
         $use->nom=$validated['nom'];
         $use->prenom=$validated['prenom'];
         $use->cin=$validated['cin_'];
         $use->specialite=$validated['specialite'];
         $use->niveau=$validated['niveau'];
         $use->telephone=$validated['telephone'];
+        $use->telephone=$validated['telephone'];
+        $use->email=$request->email;
         $use->user_id=$id;
         $use->master_id= $master->id;
        
         $use->save();
+       
         $valid= $request->input('forme',[]);
         foreach ($valid as $key) {
          $use->allformations()->attach($key);
-         # code...
+         
         }
         
+        $useer->notify(new myNotification($use)); 
+       
         session()->flash('student_saved', true);
     
      return view('modalSuccess');
-
+    } catch (QueryException $e) {
+        
+        return redirect()->back()->with('error', 'Une erreur s\'est produite lors de l\'insertion.');
+    }
+  
     }
 }

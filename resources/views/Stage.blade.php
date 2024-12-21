@@ -5,6 +5,8 @@
         cursor: pointer;
     }
 </style>
+
+
 <nav class="navbar navbar-expand-lg navbar-light ">
   <div class="container-fluid p-0 ">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,7 +80,7 @@
         </div>
       
         <div class="w-100 mb-3"></div>
-        <div class=" col-8 col-xs-12 ">
+        <div class=" col-4 col-xs-12 ">
             <div class="mb-4">
               
             <textarea class="form-control" placeholder="Specialité de l'etudiant*" id="specialite" name="specialite"  value="{{ old('specialite') }}" required></textarea>
@@ -86,6 +88,13 @@
              </div>
 
         </div>
+        <div class="col-4">
+          <div class="mb-4">
+            
+              <input type="mail" class="form-control" id="mail" aria-describedby="email" name="email" placeholder="Mail*" value="{{ old('telephone') }}" >
+             
+            </div>
+      </div>
         <div class="w-100 mb-3"></div>
         <div class="col-4">
             <div class="mb-4">
@@ -130,7 +139,9 @@
           
           </div>
         </div>
+        wague good
       -->
+      
       <div class="col-8 col-xs-12">
         <div class="accordion accordion-flush border" id="accordionFlushExample">
             @foreach($categories as $category)
@@ -154,7 +165,7 @@
             @endforeach
         </div>
     </div>
-    
+  
         <div class=" w-100  mb-4"></div>
         <div class="col-2">
           <span class="text-secondary">Cin</span>
@@ -207,6 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   </script>
    <script>
+    
     $(document).ready(function() {
         $('#myForm').on('submit', function(event) {
             event.preventDefault();
@@ -234,5 +246,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
     </script>
 @endsection

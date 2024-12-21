@@ -52,6 +52,7 @@ class myNotification extends Notification
                     ->line('Prenom: '.$this->data->prenom)
                     ->line('Cin: '.$this->data->cin)
                     ->line('Telephone: '.$this->data->telephone)
+                  
                     ->line('Inscrit par: '.$user->name)
                     ->line('Date inscription: '.$this->data->created_at);
 

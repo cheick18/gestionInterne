@@ -13,13 +13,14 @@ $u= $users->find(Auth::user()->id);
 <h3 class="fs-4 mb-3" style="color: #E62E36">Liste de toutes les inscriptions</h3>
 
 <div class="col table-responsive">
-    <table class="table bg-white rounded shadow-sm  table-hover">
+    <table class="table bg-white rounded shadow-sm  table-hover table-responsive">
         <thead>
             <tr>
                 
                 <th scope="col">Cin</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Prenom</th>
+                <th scope="col">Email</th>
                 <th scope="col">Niveau</th> 
                 <th scope="col">Specialite</th>   
                <th scope="col">Telephone</th>
@@ -39,6 +40,7 @@ $u= $users->find(Auth::user()->id);
                <td>{{$user->CIN}}</td>
                <td>{{$user->Nom}}</td>
                <td>{{$user->Prenom}}</td>
+               <td>{{$user->email}}</td>
                <td>{{$user->Niveau}} </td>
                <td>{{$user->Specialite}} </td>
                <td>{{$user->Telephone}} </td>

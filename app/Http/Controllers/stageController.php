@@ -6,6 +6,7 @@ use App\Models\Inscription;
 use App\Models\Stage;
 use App\Models\User;
 use App\Notifications\myNotification;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class stageController extends Controller
@@ -13,7 +14,9 @@ class stageController extends Controller
     //
     public function storeStage(Request $request, $id){
        
-
+      try {
+        //code...
+     
         $validated = $request->validate([
             'nom' => 'required|max:255',
             'prenom' => 'required',
@@ -52,8 +55,9 @@ $files['assurance'] = $request->file('assurance')->store('public/app/fichiers');
         $use->specialite=$validated['specialite'];
         $use->niveau=$validated['niveau'];
         $use->telephone=$validated['telephone'];
+        $use->email=$request->email;
         $use->user_id=$id;
-        $use->lp_id=$stage->id;
+        $use->stage_id=$stage->id;
         
        $use->save();
     
@@ -68,6 +72,9 @@ $files['assurance'] = $request->file('assurance')->store('public/app/fichiers');
        session()->flash('student_saved', true);
     
        return view('modalSuccess');
+    } catch (QueryException $e) {
+        return redirect()->back()->with('error', 'Une erreur s\'est produite lors de l\'insertion.');
+      }
     
     }
 }

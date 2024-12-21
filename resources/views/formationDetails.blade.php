@@ -1,7 +1,7 @@
 @extends('layouts.dash')
 @section('content')
-            <div class="">
-                <table class="table rounded shadow-sm border">
+            <div class="table-responsive">
+                <table class="table rounded shadow-sm border table-responsive">
                     <thead>
                         <tr>
                             <th scope="col">Module</th>

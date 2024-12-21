@@ -20,7 +20,8 @@ class CreateInscriptionsTable extends Migration
             $table->unsignedBigInteger('forma_id')->nullable();
             $table->unsignedBigInteger('stage_id')->nullable();
             $table->unsignedBigInteger('master_id')->nullable();
-            $table->unsignedBigInteger('certification_id')->nullable();
+            $table->string('email')->unique();
+            $table->unsignedBigInteger('list_certifs_id')->nullable();
              $table->string('Nom');
             $table->string('Prenom');
             $table->string('CIN')->unique();
