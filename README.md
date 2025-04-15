@@ -33,3 +33,4 @@ Application interne de gestion complète développée avec Laravel, intégrant d
 ## Tableau de bord de l'administrateur
 ![Tableau de bord de l'administrateur](./captures/adminDashboard.png)
 ![Tableau de bord de l'administrateur](./captures/adminDashboard2.png)
+![Tableau de bord de l'administrateur](./captures/historiqueInscription.png)
